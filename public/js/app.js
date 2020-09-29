@@ -4557,14 +4557,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   },
   data: function data() {
     return {
-      bgColor: [200, 200, 200],
+      scale: 4,
       width: 800,
       height: 800,
       position: {
         x: 10,
         y: 10
       },
-      fire: 0,
       inputs: {
         mouse: false,
         gamepad: true,
@@ -4574,6 +4573,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   },
   mounted: function mounted() {
     this.width = document.getElementById('main').offsetWidth;
+    this.height = document.getElementById('main').offsetHeight;
+    this.scale = Math.ceil(this.width / 100);
   },
   methods: {
     moveX: function moveX(e) {
@@ -9243,7 +9244,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".main[data-v-3a2c79dd] {\n  position: relative;\n  height: 800px;\n  background-size: contain;\n  background-repeat: no-repeat;\n  background-position: center center;\n}\n.main .elements[data-v-3a2c79dd] {\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  right: 0;\n}\n.main .elements .answers[data-v-3a2c79dd] {\n  width: 100%;\n}\n.main .elements .answers *[data-v-3a2c79dd] {\n  background-color: rgba(255, 0, 0, 0.3);\n}\n.main .answers[data-v-3a2c79dd] {\n  min-height: 50px;\n}\n.main .navigation[data-v-3a2c79dd] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  z-index: 100;\n}\n.main .canvas[data-v-3a2c79dd] {\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n}\n.main .avatar[data-v-3a2c79dd] {\n  position: absolute;\n}", ""]);
+exports.push([module.i, ".main[data-v-3a2c79dd] {\n  position: relative;\n  background-size: contain;\n  background-repeat: no-repeat;\n  background-position: center center;\n}\n.main .elements[data-v-3a2c79dd] {\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  right: 0;\n}\n.main .elements .answers[data-v-3a2c79dd] {\n  width: 100%;\n}\n.main .elements .answers *[data-v-3a2c79dd] {\n  background-color: rgba(255, 0, 0, 0.3);\n}\n.main .answers[data-v-3a2c79dd] {\n  min-height: 50px;\n}\n.main .navigation[data-v-3a2c79dd] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  z-index: 100;\n}\n.main .canvas[data-v-3a2c79dd] {\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n}\n.main .avatar[data-v-3a2c79dd] {\n  position: absolute;\n}", ""]);
 
 // exports
 
@@ -41166,7 +41167,7 @@ var render = function() {
     "div",
     {
       staticClass: "main",
-      style: "background-image: url('" + _vm.image + "' );",
+      style: "background-image: url('" + _vm.image + "' ); height: 100%;",
       attrs: { id: "main" }
     },
     [
@@ -41272,12 +41273,12 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("gamepad-input", {
-        attrs: { scale: 4, disabled: !_vm.inputs.gamepad },
+        attrs: { scale: _vm.scale, disabled: !_vm.inputs.gamepad },
         on: { "move-x": _vm.moveX, "move-y": _vm.moveY, button: _vm.button }
       }),
       _vm._v(" "),
       _c("keyboard-input", {
-        attrs: { disabled: !_vm.inputs.keyboard, scale: 4 },
+        attrs: { disabled: !_vm.inputs.keyboard, scale: _vm.scale },
         on: { "move-x": _vm.moveX, "move-y": _vm.moveY, button: _vm.button }
       }),
       _vm._v(" "),

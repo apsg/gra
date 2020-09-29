@@ -1,5 +1,5 @@
 <template>
-    <div id="main" class="main" :style="'background-image: url(\'' + image + '\' );'">
+    <div id="main" class="main" :style="'background-image: url(\'' + image + '\' ); height: 100%;' ">
         <div class="navigation d-flex justify-content-between">
             <div class="inputs-selector btn-group">
                 <button class="btn"
@@ -52,7 +52,7 @@
         ></avatar>
 
         <gamepad-input
-            :scale='4'
+            :scale='scale'
             :disabled="!inputs.gamepad"
             v-on:move-x="moveX"
             v-on:move-y="moveY"
@@ -60,7 +60,7 @@
 
         <keyboard-input
             :disabled="!inputs.keyboard"
-            :scale='4'
+            :scale='scale'
             v-on:move-x="moveX"
             v-on:move-y="moveY"
             v-on:button="button"
@@ -107,14 +107,13 @@ export default {
 
     data() {
         return {
-            bgColor: [200, 200, 200],
+            scale: 4,
             width: 800,
             height: 800,
             position: {
                 x: 10,
                 y: 10,
             },
-            fire: 0,
             inputs: {
                 mouse: false,
                 gamepad: true,
@@ -125,6 +124,8 @@ export default {
 
     mounted() {
         this.width = document.getElementById('main').offsetWidth;
+        this.height = document.getElementById('main').offsetHeight;
+        this.scale = Math.ceil(this.width / 100);
     },
 
     methods: {
@@ -211,7 +212,6 @@ export default {
 <style scoped lang="scss">
 .main {
     position: relative;
-    height: 800px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;

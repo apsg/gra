@@ -13942,6 +13942,11 @@ a.text-dark:focus {
   clip: auto;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 .color-white {
   color: white;
 }
