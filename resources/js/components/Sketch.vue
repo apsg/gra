@@ -32,21 +32,34 @@
             {{ this.position.y }} - {{ this.height }} |
             Avatar Size: {{ this.avatarSize }}
             <div class="answers d-flex">
-                <a v-for="answer in answers" href="#" class="flex-fill text-center p-3 color-white">{{ answer.text }}</a>
+                <a v-for="(answer, id) in answers"
+                   href="#"
+                   :id="'answer-'+id"
+                   :data-correct="answer.is_correct"
+                   class="flex-fill text-center p-3 color-white answer">
+                    {{ id }}
+                    {{ answer.text }}
+                </a>
             </div>
         </div>
 
-        <div class="avatar" :style="avatarStyle">
-            <img src="images/mushroom.png" :width="this.avatarSize" :height="this.avatarSize"/>
-        </div>
+        <avatar
+            id="avatar"
+            :size="avatarSize"
+            :x="this.position.x"
+            :y="this.position.y"
+            image="images/mushroom.png"
+        ></avatar>
 
         <gamepad-input
             :scale='4'
+            :disabled="!inputs.gamepad"
             v-on:move-x="moveX"
             v-on:move-y="moveY"
             v-on:button="button"></gamepad-input>
 
         <keyboard-input
+            :disabled="!inputs.keyboard"
             :scale='4'
             v-on:move-x="moveX"
             v-on:move-y="moveY"
@@ -64,6 +77,8 @@
 import GamepadInput from "./GamepadInput";
 import KeyboardInput from "./KeyboardInput";
 import MouseInput from "./MouseInput";
+import Avatar from "./Avatar";
+import {BUTTON_FIRE} from "../constants";
 
 export default {
     name: 'Sketch',
@@ -84,6 +99,7 @@ export default {
     },
 
     components: {
+        Avatar,
         MouseInput,
         KeyboardInput,
         GamepadInput
@@ -111,15 +127,6 @@ export default {
         this.width = document.getElementById('main').offsetWidth;
     },
 
-    computed: {
-        avatarStyle() {
-            return 'top: ' + this.position.y + 'px; '
-                + 'left: ' + this.position.x + 'px; '
-                + 'width: ' + this.avatarSize + 'px;'
-                + 'height: ' + this.avatarSize + 'px;';
-        }
-    },
-
     methods: {
 
         moveX(e) {
@@ -139,8 +146,10 @@ export default {
         },
 
         button(e) {
-            console.log('button');
-            this.fire = 100;
+            console.log('button', e);
+
+            if (e == BUTTON_FIRE)
+                this.checkSuccess();
         },
 
         normalizePosition() {
@@ -155,7 +164,46 @@ export default {
 
             if ((this.position.y + this.avatarSize) > this.height)
                 this.position.y = this.height - this.avatarSize;
+        },
+
+        checkSuccess() {
+            const avatarRect = document.getElementById('avatar').getBoundingClientRect();
+
+            for (let object of document.getElementsByClassName('answer')) {
+                // We do not care for incorrect objects
+                if (!this.checkIsCorrect(object))
+                    continue;
+
+                if (this.checkCollide(avatarRect, object.getBoundingClientRect())) {
+                    console.log('trafiony');
+                    this.success();
+                }
+            }
+        },
+
+        checkIsCorrect(object) {
+            return !!object.dataset['correct'];
+        },
+
+        checkCollide(avatar, object) {
+            if (avatar.right < object.left)
+                return false;
+
+            if (avatar.left > object.right)
+                return false;
+
+            if (avatar.bottom < object.top)
+                return false;
+
+            if (avatar.top > object.bottom)
+                return false;
+
+            return true;
+        },
+        success() {
+            // do something
         }
+
     }
 }
 </script>
@@ -166,7 +214,7 @@ export default {
     height: 800px;
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: center center;ca
+    background-position: center center;
 
     .elements {
         position: absolute;
@@ -183,7 +231,7 @@ export default {
         }
     }
 
-    .answers{
+    .answers {
         min-height: 50px;
     }
 

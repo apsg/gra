@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import {BUTTON_FIRE, BUTTON_SECOND, EVENT_BUTTON, EVENT_MOVE_X, EVENT_MOVE_Y, GAMEPAD} from "../constants";
+
 export default {
     name: "GamepadInput",
 
@@ -10,6 +12,10 @@ export default {
         scale: {
             type: Number,
             default: 2
+        },
+        disabled: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -33,20 +39,28 @@ export default {
     methods: {
 
         button(e) {
+            if (this.disabled)
+                return;
             // console.log('down');
-            // console.log(e);
+            console.log(e);
 
-            this.$emit('button', 1);
+            if (GAMEPAD.fireButtons.includes(e.control))
+                this.$emit(EVENT_BUTTON, BUTTON_FIRE);
+            else
+                this.$emit(EVENT_BUTTON, BUTTON_SECOND);
         },
 
         axis(e) {
+            if (this.disabled)
+                return;
+
             if ((e.axis == 'LEFT_STICK_X') && Math.abs(e.value) > 0.1) {
                 // console.log('x', e.value, e.axis);
-                this.$emit('move-x', this.scale * e.value);
+                this.$emit(EVENT_MOVE_X, this.scale * e.value);
             }
             if ((e.axis == 'LEFT_STICK_Y') && Math.abs(e.value) > 0.1) {
                 // console.log('y', e.value, e.axis);
-                this.$emit('move-y', this.scale * e.value)
+                this.$emit(EVENT_MOVE_Y, this.scale * e.value)
             }
         }
     }

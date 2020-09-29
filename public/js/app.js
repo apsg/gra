@@ -4389,10 +4389,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GamepadInput.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/GamepadInput.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Avatar.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Avatar.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -4402,12 +4402,62 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Avatar",
+  props: {
+    size: {
+      type: Number,
+      "default": 150
+    },
+    x: {
+      type: Number,
+      "default": 0
+    },
+    y: {
+      type: Number,
+      "default": 0
+    },
+    image: {
+      type: String,
+      required: true
+    }
+  },
+  computed: {
+    style: function style() {
+      return 'top: ' + this.y + 'px; ' + 'left: ' + this.x + 'px; ' + 'width: ' + this.size + 'px;' + 'height: ' + this.size + 'px;';
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GamepadInput.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/GamepadInput.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./resources/js/constants.js");
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "GamepadInput",
   props: {
     scale: {
       type: Number,
       "default": 2
+    },
+    disabled: {
+      type: Boolean,
+      "default": false
     }
   },
   mounted: function mounted() {
@@ -4424,19 +4474,22 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     button: function button(e) {
-      // console.log('down');
-      // console.log(e);
-      this.$emit('button', 1);
+      if (this.disabled) return; // console.log('down');
+
+      console.log(e);
+      if (_constants__WEBPACK_IMPORTED_MODULE_0__["GAMEPAD"].fireButtons.includes(e.control)) this.$emit(_constants__WEBPACK_IMPORTED_MODULE_0__["EVENT_BUTTON"], _constants__WEBPACK_IMPORTED_MODULE_0__["BUTTON_FIRE"]);else this.$emit(_constants__WEBPACK_IMPORTED_MODULE_0__["EVENT_BUTTON"], _constants__WEBPACK_IMPORTED_MODULE_0__["BUTTON_SECOND"]);
     },
     axis: function axis(e) {
+      if (this.disabled) return;
+
       if (e.axis == 'LEFT_STICK_X' && Math.abs(e.value) > 0.1) {
         // console.log('x', e.value, e.axis);
-        this.$emit('move-x', this.scale * e.value);
+        this.$emit(_constants__WEBPACK_IMPORTED_MODULE_0__["EVENT_MOVE_X"], this.scale * e.value);
       }
 
       if (e.axis == 'LEFT_STICK_Y' && Math.abs(e.value) > 0.1) {
         // console.log('y', e.value, e.axis);
-        this.$emit('move-y', this.scale * e.value);
+        this.$emit(_constants__WEBPACK_IMPORTED_MODULE_0__["EVENT_MOVE_Y"], this.scale * e.value);
       }
     }
   }
@@ -4453,16 +4506,22 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./resources/js/constants.js");
 //
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "KeyboardInput",
   props: {
     scale: {
       type: Number,
       "default": 2
+    },
+    disabled: {
+      type: Boolean,
+      "default": false
     }
   },
   mounted: function mounted() {
@@ -4470,22 +4529,34 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     keyboardListener: function keyboardListener(e) {
+      if (this.disabled) return;
+
       if (e.key == 'ArrowDown') {
-        this.$emit('move-y', 1 * this.scale);
-      } else if (e.key == 'ArrowUp') {
-        this.$emit('move-y', -1 * this.scale);
+        this.$emit(_constants__WEBPACK_IMPORTED_MODULE_0__["EVENT_MOVE_Y"], 1 * this.scale);
+        return;
+      }
+
+      if (e.key == 'ArrowUp') {
+        this.$emit(_constants__WEBPACK_IMPORTED_MODULE_0__["EVENT_MOVE_Y"], -1 * this.scale);
+        return;
       }
 
       if (e.key == 'ArrowLeft') {
-        this.$emit('move-x', -1 * this.scale);
+        this.$emit(_constants__WEBPACK_IMPORTED_MODULE_0__["EVENT_MOVE_X"], -1 * this.scale);
+        return;
       }
 
       if (e.key == 'ArrowRight') {
-        this.$emit('move-x', 1 * this.scale);
-      } else {
-        console.log('inpput-button', e.key);
-        this.$emit('button', 1);
+        this.$emit(_constants__WEBPACK_IMPORTED_MODULE_0__["EVENT_MOVE_X"], 1 * this.scale);
+        return;
       }
+
+      if (_constants__WEBPACK_IMPORTED_MODULE_0__["KEYBOARD"].fireButtons.includes(e.code)) {
+        this.$emit(_constants__WEBPACK_IMPORTED_MODULE_0__["EVENT_BUTTON"], _constants__WEBPACK_IMPORTED_MODULE_0__["BUTTON_FIRE"]);
+        return;
+      }
+
+      this.$emit(_constants__WEBPACK_IMPORTED_MODULE_0__["EVENT_BUTTON"], _constants__WEBPACK_IMPORTED_MODULE_0__["BUTTON_SECOND"]);
     }
   }
 });
@@ -4501,12 +4572,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./resources/js/constants.js");
 //
 //
 //
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MouseInput",
   props: {
@@ -4517,13 +4590,15 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     mouseMove: function mouseMove(e) {
-      if (!this.disabled) this.$emit('move', {
+      if (this.disabled) return;
+      this.$emit(_constants__WEBPACK_IMPORTED_MODULE_0__["EVENT_MOVE"], {
         x: e.offsetX,
         y: e.offsetY
       });
     },
     mouseClick: function mouseClick(e) {
-      if (!this.disabled) this.$emit('button', 1);
+      if (this.disabled) return;
+      this.$emit(_constants__WEBPACK_IMPORTED_MODULE_0__["EVENT_BUTTON"], _constants__WEBPACK_IMPORTED_MODULE_0__["BUTTON_FIRE"]);
     }
   }
 });
@@ -4542,6 +4617,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _GamepadInput__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GamepadInput */ "./resources/js/components/GamepadInput.vue");
 /* harmony import */ var _KeyboardInput__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./KeyboardInput */ "./resources/js/components/KeyboardInput.vue");
 /* harmony import */ var _MouseInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MouseInput */ "./resources/js/components/MouseInput.vue");
+/* harmony import */ var _Avatar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Avatar */ "./resources/js/components/Avatar.vue");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../constants */ "./resources/js/constants.js");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 //
 //
 //
@@ -4604,6 +4687,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
@@ -4624,6 +4722,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   components: {
+    Avatar: _Avatar__WEBPACK_IMPORTED_MODULE_3__["default"],
     MouseInput: _MouseInput__WEBPACK_IMPORTED_MODULE_2__["default"],
     KeyboardInput: _KeyboardInput__WEBPACK_IMPORTED_MODULE_1__["default"],
     GamepadInput: _GamepadInput__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -4648,11 +4747,6 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.width = document.getElementById('main').offsetWidth;
   },
-  computed: {
-    avatarStyle: function avatarStyle() {
-      return 'top: ' + this.position.y + 'px; ' + 'left: ' + this.position.x + 'px; ' + 'width: ' + this.avatarSize + 'px;' + 'height: ' + this.avatarSize + 'px;';
-    }
-  },
   methods: {
     moveX: function moveX(e) {
       this.position.x += e;
@@ -4668,14 +4762,49 @@ __webpack_require__.r(__webpack_exports__);
       this.normalizePosition();
     },
     button: function button(e) {
-      console.log('button');
-      this.fire = 100;
+      console.log('button', e);
+      if (e == _constants__WEBPACK_IMPORTED_MODULE_4__["BUTTON_FIRE"]) this.checkSuccess();
     },
     normalizePosition: function normalizePosition() {
       if (this.position.x < 0) this.position.x = 0;
       if (this.position.y < 0) this.position.y = 0;
       if (this.position.x + this.avatarSize > this.width) this.position.x = this.width - this.avatarSize;
       if (this.position.y + this.avatarSize > this.height) this.position.y = this.height - this.avatarSize;
+    },
+    checkSuccess: function checkSuccess() {
+      var avatarRect = document.getElementById('avatar').getBoundingClientRect();
+
+      var _iterator = _createForOfIteratorHelper(document.getElementsByClassName('answer')),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var object = _step.value;
+          // We do not care for incorrect objects
+          if (!this.checkIsCorrect(object)) continue;
+
+          if (this.checkCollide(avatarRect, object.getBoundingClientRect())) {
+            console.log('trafiony');
+            this.success();
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+    },
+    checkIsCorrect: function checkIsCorrect(object) {
+      return !!object.dataset['correct'];
+    },
+    checkCollide: function checkCollide(avatar, object) {
+      if (avatar.right < object.left) return false;
+      if (avatar.left > object.right) return false;
+      if (avatar.bottom < object.top) return false;
+      if (avatar.top > object.bottom) return false;
+      return true;
+    },
+    success: function success() {// do something
     }
   }
 });
@@ -9115,6 +9244,25 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, ".main[data-v-59da7852] {\n  position: relative;\n  height: 800px;\n  background-size: contain;\n  background-repeat: no-repeat;\n  background-position: center center;\n}\n.main .elements[data-v-59da7852] {\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  right: 0;\n}\n.main .elements .answers[data-v-59da7852] {\n  width: 100%;\n}\n.main .elements .answers *[data-v-59da7852] {\n  background-color: rgba(255, 0, 0, 0.3);\n}\n.main .answers[data-v-59da7852] {\n  min-height: 50px;\n}\n.main .navigation[data-v-59da7852] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  z-index: 100;\n}\n.main .canvas[data-v-59da7852] {\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n}\n.main .avatar[data-v-59da7852] {\n  position: absolute;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Avatar.vue?vue&type=style&index=0&id=62781b04&scoped=true&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Avatar.vue?vue&type=style&index=0&id=62781b04&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.avatar[data-v-62781b04] {\n}\n", ""]);
 
 // exports
 
@@ -40329,6 +40477,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Avatar.vue?vue&type=style&index=0&id=62781b04&scoped=true&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Avatar.vue?vue&type=style&index=0&id=62781b04&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Avatar.vue?vue&type=style&index=0&id=62781b04&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Avatar.vue?vue&type=style&index=0&id=62781b04&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MouseInput.vue?vue&type=style&index=0&id=72114760&scoped=true&lang=css&":
 /*!********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/MouseInput.vue?vue&type=style&index=0&id=72114760&scoped=true&lang=css& ***!
@@ -40943,6 +41121,32 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Avatar.vue?vue&type=template&id=62781b04&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Avatar.vue?vue&type=template&id=62781b04&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "avatar", style: _vm.style }, [
+    _c("img", { attrs: { src: _vm.image, width: _vm.size, height: _vm.size } })
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GamepadInput.vue?vue&type=template&id=dfffa758&scoped=true&":
 /*!***************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/GamepadInput.vue?vue&type=template&id=dfffa758&scoped=true& ***!
@@ -41106,37 +41310,49 @@ var render = function() {
         _c(
           "div",
           { staticClass: "answers d-flex" },
-          _vm._l(_vm.answers, function(answer) {
+          _vm._l(_vm.answers, function(answer, id) {
             return _c(
               "a",
               {
-                staticClass: "flex-fill text-center p-3 color-white",
-                attrs: { href: "#" }
+                staticClass: "flex-fill text-center p-3 color-white answer",
+                attrs: {
+                  href: "#",
+                  id: "answer-" + id,
+                  "data-correct": answer.is_correct
+                }
               },
-              [_vm._v(_vm._s(answer.text))]
+              [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(id) +
+                    "\n                " +
+                    _vm._s(answer.text) +
+                    "\n            "
+                )
+              ]
             )
           }),
           0
         )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "avatar", style: _vm.avatarStyle }, [
-        _c("img", {
-          attrs: {
-            src: "images/mushroom.png",
-            width: this.avatarSize,
-            height: this.avatarSize
-          }
-        })
-      ]),
+      _c("avatar", {
+        attrs: {
+          id: "avatar",
+          size: _vm.avatarSize,
+          x: this.position.x,
+          y: this.position.y,
+          image: "images/mushroom.png"
+        }
+      }),
       _vm._v(" "),
       _c("gamepad-input", {
-        attrs: { scale: 4 },
+        attrs: { scale: 4, disabled: !_vm.inputs.gamepad },
         on: { "move-x": _vm.moveX, "move-y": _vm.moveY, button: _vm.button }
       }),
       _vm._v(" "),
       _c("keyboard-input", {
-        attrs: { scale: 4 },
+        attrs: { disabled: !_vm.inputs.keyboard, scale: 4 },
         on: { "move-x": _vm.moveX, "move-y": _vm.moveY, button: _vm.button }
       }),
       _vm._v(" "),
@@ -53416,6 +53632,93 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/js/components/Avatar.vue":
+/*!********************************************!*\
+  !*** ./resources/js/components/Avatar.vue ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Avatar_vue_vue_type_template_id_62781b04_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Avatar.vue?vue&type=template&id=62781b04&scoped=true& */ "./resources/js/components/Avatar.vue?vue&type=template&id=62781b04&scoped=true&");
+/* harmony import */ var _Avatar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Avatar.vue?vue&type=script&lang=js& */ "./resources/js/components/Avatar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Avatar_vue_vue_type_style_index_0_id_62781b04_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Avatar.vue?vue&type=style&index=0&id=62781b04&scoped=true&lang=css& */ "./resources/js/components/Avatar.vue?vue&type=style&index=0&id=62781b04&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Avatar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Avatar_vue_vue_type_template_id_62781b04_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Avatar_vue_vue_type_template_id_62781b04_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "62781b04",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Avatar.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Avatar.vue?vue&type=script&lang=js&":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/Avatar.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Avatar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Avatar.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Avatar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Avatar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Avatar.vue?vue&type=style&index=0&id=62781b04&scoped=true&lang=css&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/Avatar.vue?vue&type=style&index=0&id=62781b04&scoped=true&lang=css& ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Avatar_vue_vue_type_style_index_0_id_62781b04_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Avatar.vue?vue&type=style&index=0&id=62781b04&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Avatar.vue?vue&type=style&index=0&id=62781b04&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Avatar_vue_vue_type_style_index_0_id_62781b04_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Avatar_vue_vue_type_style_index_0_id_62781b04_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Avatar_vue_vue_type_style_index_0_id_62781b04_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Avatar_vue_vue_type_style_index_0_id_62781b04_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Avatar_vue_vue_type_style_index_0_id_62781b04_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Avatar.vue?vue&type=template&id=62781b04&scoped=true&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/Avatar.vue?vue&type=template&id=62781b04&scoped=true& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Avatar_vue_vue_type_template_id_62781b04_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Avatar.vue?vue&type=template&id=62781b04&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Avatar.vue?vue&type=template&id=62781b04&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Avatar_vue_vue_type_template_id_62781b04_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Avatar_vue_vue_type_template_id_62781b04_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/GamepadInput.vue":
 /*!**************************************************!*\
   !*** ./resources/js/components/GamepadInput.vue ***!
@@ -53725,6 +54028,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Sketch_vue_vue_type_template_id_59da7852_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/constants.js":
+/*!***********************************!*\
+  !*** ./resources/js/constants.js ***!
+  \***********************************/
+/*! exports provided: BUTTON_FIRE, BUTTON_SECOND, EVENT_MOVE, EVENT_MOVE_X, EVENT_MOVE_Y, EVENT_BUTTON, GAMEPAD, KEYBOARD */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BUTTON_FIRE", function() { return BUTTON_FIRE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BUTTON_SECOND", function() { return BUTTON_SECOND; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EVENT_MOVE", function() { return EVENT_MOVE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EVENT_MOVE_X", function() { return EVENT_MOVE_X; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EVENT_MOVE_Y", function() { return EVENT_MOVE_Y; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EVENT_BUTTON", function() { return EVENT_BUTTON; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GAMEPAD", function() { return GAMEPAD; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "KEYBOARD", function() { return KEYBOARD; });
+var BUTTON_FIRE = 'FIRE';
+var BUTTON_SECOND = 'SECOND';
+var EVENT_MOVE = 'move';
+var EVENT_MOVE_X = 'move-x';
+var EVENT_MOVE_Y = 'move-y';
+var EVENT_BUTTON = 'button';
+var GAMEPAD = {
+  fireButtons: ['RIGHT_TOP_SHOULDER', 'LEFT_TOP_SHOULDER', 'FACE_1', 'FACE_2', 'FACE_3', 'FACE_4']
+};
+var KEYBOARD = {
+  fireButtons: ['Enter', 'Space', 'NumpadEnter']
+};
 
 /***/ }),
 
