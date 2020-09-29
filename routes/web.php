@@ -22,4 +22,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('missions/{mission}', MissionsController::class . '@show')->name('mission.show');
+Route::group(['prefix' => 'missions', 'middleware' => 'auth'], function () {
+    Route::get('/', MissionsController::class . '@index')->name('mission.index');
+    Route::get('/{mission}', MissionsController::class . '@show')->name('mission.show');
+});
+
+Route::get('demo', MissionsController::class . '@demo');
