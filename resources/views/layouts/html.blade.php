@@ -19,10 +19,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @yield('head')
 </head>
 <body @yield('body')>
 
 @yield('app')
 
+@yield('body-end')
 </body>
 </html>

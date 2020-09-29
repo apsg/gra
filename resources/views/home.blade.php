@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('head')
+    @livewireStyles
+@endsection
+
 @section('content')
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -14,13 +18,13 @@
                             </div>
                         @endif
 
-                        <game
-                            image="{{ asset('images/missions/m1.jpg') }}"
-                            :answers="[{'text': 'odp 1', is_correct: false},{'text': 'odp 2', is_correct: false},{'text': 'odp 3', is_correct: true}]"
-                        ></game>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('body-end')
+    @livewireScripts
 @endsection

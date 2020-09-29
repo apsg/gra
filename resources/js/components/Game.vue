@@ -48,7 +48,7 @@
             :size="avatarSize"
             :x="this.position.x"
             :y="this.position.y"
-            image="images/mushroom.png"
+            :image="avatar"
         ></avatar>
 
         <gamepad-input
@@ -81,7 +81,7 @@ import Avatar from "./Avatar";
 import {BUTTON_FIRE} from "../constants";
 
 export default {
-    name: 'Sketch',
+    name: 'Game',
 
     props: {
         avatarSize: {
@@ -95,6 +95,10 @@ export default {
         answers: {
             type: Array,
             default: []
+        },
+        avatar: {
+            type: String,
+            required: true
         }
     },
 

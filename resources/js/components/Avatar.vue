@@ -39,7 +39,4 @@ export default {
 </script>
 
 <style scoped>
-.avatar {
-
-}
 </style>
