@@ -46,6 +46,7 @@
         ></answer>
 
         <avatar
+            ref="avatar"
             id="avatar"
             :size="avatarSize"
             :x="this.position.x"
@@ -176,7 +177,7 @@ export default {
         },
 
         checkSuccess() {
-            const avatarRect = document.getElementById('avatar').getBoundingClientRect();
+            const avatarRect = this.$refs.avatar.$el.getBoundingClientRect();
 
             for (let answer of this.$refs.answers) {
                 // We do not care for incorrect objects

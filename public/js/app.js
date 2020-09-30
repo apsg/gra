@@ -4406,7 +4406,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Answer",
   props: {
@@ -4449,17 +4448,14 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     answerStyle: function answerStyle() {
       return 'width: ' + this.maxWidth / 4 + 'px;' + 'top: ' + this.y + 'px; ' + 'left: ' + this.x + 'px; ';
-    },
-    rect: function rect() {
-      return this.$refs.answer.getBoundingClientRect();
     }
   },
   methods: {
     checkCollide: function checkCollide(object) {
-      if (object.right < this.rect.left) return false;
-      if (object.left > this.rect.right) return false;
-      if (object.bottom < this.rect.top) return false;
-      if (object.top > this.rect.bottom) return false;
+      if (object.right < this.$el.getBoundingClientRect().left) return false;
+      if (object.left > this.$el.getBoundingClientRect().right) return false;
+      if (object.bottom < this.$el.getBoundingClientRect().top) return false;
+      if (object.top > this.$el.getBoundingClientRect().bottom) return false;
       return true;
     },
     move: function move() {
@@ -4469,8 +4465,8 @@ __webpack_require__.r(__webpack_exports__);
       setTimeout(this.move, 300);
     },
     normalize: function normalize() {
-      if (this.x > this.maxWidth - this.rect.width) {
-        this.x = this.maxWidth - this.rect.width;
+      if (this.x > this.maxWidth - this.$el.getBoundingClientRect().width) {
+        this.x = this.maxWidth - this.$el.getBoundingClientRect().width;
         this.dx = -this.dx;
       }
 
@@ -4479,8 +4475,8 @@ __webpack_require__.r(__webpack_exports__);
         this.dx = -this.dx;
       }
 
-      if (this.y > this.maxHeight - this.rect.width) {
-        this.y = this.maxHeight - this.rect.width;
+      if (this.y > this.maxHeight - this.$el.getBoundingClientRect().width) {
+        this.y = this.maxHeight - this.$el.getBoundingClientRect().width;
         this.dy = -this.dy;
       }
 
@@ -4766,6 +4762,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
 
 
 
@@ -4845,7 +4842,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       if (this.position.y + this.avatarSize > this.height) this.position.y = this.height - this.avatarSize;
     },
     checkSuccess: function checkSuccess() {
-      var avatarRect = document.getElementById('avatar').getBoundingClientRect();
+      var avatarRect = this.$refs.avatar.$el.getBoundingClientRect();
 
       var _iterator = _createForOfIteratorHelper(this.$refs.answers),
           _step;
@@ -41244,7 +41241,6 @@ var render = function() {
   return _c(
     "div",
     {
-      ref: "answer",
       staticClass: "answer text-center font-mono bg-blue color-red p-3",
       style: _vm.answerStyle
     },
@@ -41435,6 +41431,7 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("avatar", {
+        ref: "avatar",
         attrs: {
           id: "avatar",
           size: _vm.avatarSize,

@@ -1,6 +1,5 @@
 <template>
     <div
-        ref="answer"
         class="answer text-center font-mono bg-blue color-red p-3"
         :style="answerStyle">
         {{ text }}
@@ -57,26 +56,22 @@ export default {
             return 'width: ' + (this.maxWidth / 4) + 'px;'
                 + 'top: ' + this.y + 'px; '
                 + 'left: ' + this.x + 'px; ';
-        },
-
-        rect() {
-            return this.$refs.answer.getBoundingClientRect();
         }
     },
 
     methods: {
 
         checkCollide(object) {
-            if (object.right < this.rect.left)
+            if (object.right < this.$el.getBoundingClientRect().left)
                 return false;
 
-            if (object.left > this.rect.right)
+            if (object.left > this.$el.getBoundingClientRect().right)
                 return false;
 
-            if (object.bottom < this.rect.top)
+            if (object.bottom < this.$el.getBoundingClientRect().top)
                 return false;
 
-            if (object.top > this.rect.bottom)
+            if (object.top > this.$el.getBoundingClientRect().bottom)
                 return false;
 
             return true;
@@ -92,8 +87,8 @@ export default {
         },
 
         normalize() {
-            if (this.x > this.maxWidth - this.rect.width) {
-                this.x = this.maxWidth - this.rect.width;
+            if (this.x > this.maxWidth - this.$el.getBoundingClientRect().width) {
+                this.x = this.maxWidth - this.$el.getBoundingClientRect().width;
                 this.dx = -this.dx;
             }
 
@@ -102,8 +97,8 @@ export default {
                 this.dx = -this.dx;
             }
 
-            if (this.y > this.maxHeight - this.rect.width) {
-                this.y = this.maxHeight - this.rect.width;
+            if (this.y > this.maxHeight - this.$el.getBoundingClientRect().width) {
+                this.y = this.maxHeight - this.$el.getBoundingClientRect().width;
                 this.dy = -this.dy;
             }
 
