@@ -13947,7 +13947,23 @@ body {
   height: 100%;
 }
 
+.font-mono {
+  font-family: "IBM Plex Mono", monospace;
+}
+
 .color-white {
   color: white;
+}
+
+.color-red {
+  color: #EF3B2D;
+}
+
+.bg-red {
+  background-color: #ef3b2d;
+}
+
+.bg-blue {
+  background-color: #1A202C;
 }
 

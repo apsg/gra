@@ -1,9 +1,9 @@
 @extends('layouts.game')
 
 @section('content')
-    <game
+    <mission
         image="{{ asset($mission->image) }}"
         :answers="{{ $mission->answers }}"
         avatar="{{ asset('images/mushroom.png') }}"
-    ></game>
+    ></mission>
 @endsection

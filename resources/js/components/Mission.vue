@@ -32,16 +32,18 @@
             {{ this.position.y }} - {{ this.height }} |
             Avatar Size: {{ this.avatarSize }}
             <div class="answers d-flex">
-                <a v-for="(answer, id) in answers"
-                   href="#"
-                   :id="'answer-'+id"
-                   :data-correct="answer.is_correct"
-                   class="flex-fill text-center p-3 color-white answer">
-                    {{ id }}
-                    {{ answer.text }}
-                </a>
+
             </div>
         </div>
+
+        <answer v-for="(answer, id) in answers"
+                ref="answers"
+                v-bind:key="id"
+                :maxWidth="width"
+                :maxHeight="height"
+                :text="answer.text"
+                :correct="!!answer.is_correct"
+        ></answer>
 
         <avatar
             id="avatar"
@@ -78,6 +80,7 @@ import GamepadInput from "./GamepadInput";
 import KeyboardInput from "./KeyboardInput";
 import MouseInput from "./MouseInput";
 import Avatar from "./Avatar";
+import Answer from "./Answer";
 import {BUTTON_FIRE} from "../constants";
 
 export default {
@@ -103,6 +106,7 @@ export default {
     },
 
     components: {
+        Answer,
         Avatar,
         MouseInput,
         KeyboardInput,
@@ -174,37 +178,18 @@ export default {
         checkSuccess() {
             const avatarRect = document.getElementById('avatar').getBoundingClientRect();
 
-            for (let object of document.getElementsByClassName('answer')) {
+            for (let answer of this.$refs.answers) {
                 // We do not care for incorrect objects
-                if (!this.checkIsCorrect(object))
+                if (!answer.correct)
                     continue;
 
-                if (this.checkCollide(avatarRect, object.getBoundingClientRect())) {
+                if (answer.checkCollide(avatarRect)) {
                     console.log('trafiony');
                     this.success();
                 }
             }
         },
 
-        checkIsCorrect(object) {
-            return !!object.dataset['correct'];
-        },
-
-        checkCollide(avatar, object) {
-            if (avatar.right < object.left)
-                return false;
-
-            if (avatar.left > object.right)
-                return false;
-
-            if (avatar.bottom < object.top)
-                return false;
-
-            if (avatar.top > object.bottom)
-                return false;
-
-            return true;
-        },
         success() {
             // do something
         }
@@ -219,6 +204,7 @@ export default {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
+    overflow: hidden;
 
     .elements {
         position: absolute;
