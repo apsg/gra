@@ -56,6 +56,25 @@ class MissionsSeeder extends Seeder
                     ],
                 ],
             ],
+            [
+                'slug'    => 'm2',
+                'image'   => 'images/missions/m1.jpg',
+                'title'   => 'Generalizacja - nigdy się nie nauczę 2',
+                'answers' => [
+                    [
+                        'text'       => "Nadmierna generalizacja",
+                        'is_correct' => true,
+                    ],
+                    [
+                        'text'       => "Myślenie czarno-białe",
+                        'is_correct' => false,
+                    ],
+                    [
+                        'text'       => "Pomijanie pozytywów",
+                        'is_correct' => false,
+                    ],
+                ],
+            ],
         ];
     }
 }

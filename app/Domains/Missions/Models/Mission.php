@@ -1,6 +1,7 @@
 <?php
 namespace App\Domains\Missions\Models;
 
+use App\Domains\Games\Models\Game;
 use App\Domains\Missions\Scopes\MissionScopes;
 use App\Models\User;
 use Carbon\Carbon;
@@ -29,6 +30,10 @@ class Mission extends Model
         'title',
     ];
 
+    protected $with = [
+        'answers',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -37,5 +42,15 @@ class Mission extends Model
     public function answers()
     {
         return $this->hasMany(Answer::class);
+    }
+
+    public function games()
+    {
+        return $this->belongsToMany(Game::class);
+    }
+
+    public function getImageAttribute()
+    {
+        return asset($this->attributes['image']);
     }
 }

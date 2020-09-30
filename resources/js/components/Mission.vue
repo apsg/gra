@@ -43,6 +43,7 @@
                 :maxHeight="height"
                 :text="answer.text"
                 :correct="!!answer.is_correct"
+                :stop="stop"
         ></answer>
 
         <avatar
@@ -127,7 +128,8 @@ export default {
                 mouse: false,
                 gamepad: true,
                 keyboard: true,
-            }
+            },
+            stop: false
         }
     },
 
@@ -135,9 +137,18 @@ export default {
         this.width = document.getElementById('main').offsetWidth;
         this.height = document.getElementById('main').offsetHeight;
         this.scale = Math.ceil(this.width / 100);
+
+        this.restart();
     },
 
     methods: {
+
+        restart() {
+            for (let answer of this.$refs.answers)
+                answer.restart();
+
+            this.stop = false;
+        },
 
         moveX(e) {
             this.position.x += e;
@@ -192,7 +203,8 @@ export default {
         },
 
         success() {
-            // do something
+            this.stop = true;
+            this.$emit('success', 1);
         }
 
     }

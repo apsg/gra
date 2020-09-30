@@ -30,6 +30,10 @@ export default {
         speed: {
             type: Number,
             default: 5
+        },
+        stop: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -43,11 +47,7 @@ export default {
     },
 
     mounted() {
-        this.x = Math.random() * this.maxWidth;
-        this.y = Math.random() * this.maxHeight;
-        this.dx = Math.random() > 0.5 ? -1 : 1;
-        this.dy = Math.random() > 0.5 ? -1 : 1;
-
+        this.restart();
         setTimeout(this.move, 300);
     },
 
@@ -60,6 +60,13 @@ export default {
     },
 
     methods: {
+
+        restart() {
+            this.x = Math.random() * this.maxWidth;
+            this.y = Math.random() * this.maxHeight;
+            this.dx = Math.random() > 0.5 ? -1 : 1;
+            this.dy = Math.random() > 0.5 ? -1 : 1;
+        },
 
         checkCollide(object) {
             if (object.right < this.$el.getBoundingClientRect().left)
@@ -83,7 +90,8 @@ export default {
 
             this.normalize();
 
-            setTimeout(this.move, 300);
+            if (!this.stop)
+                setTimeout(this.move, 300);
         },
 
         normalize() {
@@ -107,7 +115,6 @@ export default {
                 this.dy = -this.dy;
             }
         }
-
     }
 }
 </script>

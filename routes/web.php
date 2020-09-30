@@ -1,5 +1,6 @@
 <?php
 
+use App\Domains\Games\Controllers\GamesController;
 use App\Domains\Missions\Controllers\MissionsController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,3 +29,7 @@ Route::group(['prefix' => 'missions', 'middleware' => 'auth'], function () {
 });
 
 Route::get('demo', MissionsController::class . '@demo');
+
+Route::group(['prefix' => 'game', 'middleware' => 'auth'], function () {
+    Route::get('/{game}', GamesController::class . '@show');
+});
