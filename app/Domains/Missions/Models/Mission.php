@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int            id
  * @property string         image
  * @property string         slug
+ * @property string         title
  * @property int|null       user_id
  * @property Carbon         created_at
  * @property Carbon         updated_at
@@ -25,6 +26,7 @@ class Mission extends Model
         'image',
         'slug',
         'user_id',
+        'title',
     ];
 
     public function user()
@@ -36,5 +38,4 @@ class Mission extends Model
     {
         return $this->hasMany(Answer::class);
     }
-
 }

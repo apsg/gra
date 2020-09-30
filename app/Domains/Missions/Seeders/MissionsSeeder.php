@@ -21,6 +21,7 @@ class MissionsSeeder extends Seeder
                 'slug' => $missionData['slug'],
             ], [
                 'image' => $missionData['image'],
+                'title' => $missionData['title'],
             ]);
 
             foreach ($missionData['answers'] as $answer) {
@@ -39,6 +40,7 @@ class MissionsSeeder extends Seeder
             [
                 'slug'    => 'm1',
                 'image'   => 'images/missions/m1.jpg',
+                'title'   => 'Generalizacja - nigdy się nie nauczę',
                 'answers' => [
                     [
                         'text'       => "Nadmierna generalizacja",

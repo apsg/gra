@@ -81,7 +81,7 @@ import Avatar from "./Avatar";
 import {BUTTON_FIRE} from "../constants";
 
 export default {
-    name: 'Game',
+    name: 'Mission',
 
     props: {
         avatarSize: {

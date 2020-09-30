@@ -26,6 +26,7 @@ class MissionFactory extends Factory
             'image'   => $this->faker->imageUrl(),
             'slug'    => $this->faker->slug,
             'user_id' => $this->faker->boolean ? User::factory() : null,
+            'title'   => $this->faker->title,
         ];
     }
 }

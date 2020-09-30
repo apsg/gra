@@ -16,7 +16,7 @@
 
                         @foreach($missions as $mission)
                             <a href="{{ route('mission.show', $mission) }}" target="_blank">
-                                {{ $mission->slug }}
+                                {{ $mission->slug }} - {{ $mission->title }}
                             </a>
                         @endforeach
                     </div>
