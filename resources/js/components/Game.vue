@@ -1,18 +1,29 @@
 <template>
     <div class="game">
+        <transition name="fade">
+            <text-box v-if="isShowText">
+                {{ text }}
+            </text-box>
+        </transition>
         <mission
             ref="mission"
             :image="missions[currentMission].image"
             :answers="missions[currentMission].answers"
-            avatar="images/mushroom.png"
+            avatar="/images/mushroom.png"
             v-on:success="nextMission"
         ></mission>
     </div>
 </template>
 
 <script>
+import TextBox from './TextBox';
+
 export default {
     name: "Game",
+
+    components: {
+        TextBox
+    },
 
     props: {
         id: {
@@ -33,7 +44,9 @@ export default {
         return {
             points: 0,
             currentMission: 0,
-            start: false
+            start: false,
+            isShowText: false,
+            text: "",
         }
     },
 
@@ -44,18 +57,44 @@ export default {
     methods: {
         startGame() {
             this.start = true;
+            this.showText(this.missionText(this.currentMission + 1));
         },
 
         nextMission() {
+            if (this.winning === true)
+                return;
+
             this.points += 10;
 
             if (this.currentMission === this.missions.length - 1) {
-                alert('Wygrana!');
+                this.winning = true;
+                this.showText(this.winText(this.points), true);
                 return;
             }
 
             this.currentMission += 1;
+            this.showText(this.missionText(this.currentMission + 1));
             this.$refs.mission.restart();
+        },
+
+        showText(text, dontHide = false) {
+            this.text = text;
+            this.isShowText = true;
+
+            if (!dontHide)
+                setTimeout(this.hideText, 2000);
+        },
+
+        hideText() {
+            this.isShowText = false;
+        },
+
+        missionText(mission) {
+            return 'Misja: ' + mission;
+        },
+
+        winText(points) {
+            return 'Wygrana! \n Zdobyto: ' + points + ' pkt.';
         }
     }
 }
@@ -67,4 +106,5 @@ export default {
     width: 100%;
     height: 100%;
 }
+
 </style>
