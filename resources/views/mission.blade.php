@@ -2,7 +2,7 @@
 
 @section('content')
     <mission
-        image="{{ asset($mission->image) }}"
+        image="{{ $mission->imageUrl() }}"
         :answers="{{ $mission->answers }}"
         avatar="{{ asset('images/mushroom.png') }}"
     ></mission>

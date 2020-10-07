@@ -6,6 +6,7 @@ use App\Domains\Missions\Scopes\MissionScopes;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 /**
  * @property int            id
@@ -52,5 +53,10 @@ class Mission extends Model
     public function getImageAttribute()
     {
         return asset($this->attributes['image']);
+    }
+
+    public function imageUrl() : string
+    {
+        return url('/storage/' . $this->image);
     }
 }

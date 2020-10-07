@@ -25,7 +25,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['prefix' => 'missions', 'middleware' => 'auth'], function () {
     Route::get('/', MissionsController::class . '@index')->name('mission.index');
-    Route::get('/{mission}', MissionsController::class . '@show')->name('mission.show');
+    Route::post('/', MissionsController::class . '@store')->name('mission.store');
+    Route::get('/create', MissionsController::class . '@create')->name('mission.create');
+    Route::get('/{mission}', MissionsController::class . '@show')->name('mission.edit');
+    Route::delete('/{mission}', MissionsController::class . '@delete')->name('mission.delete');
+    Route::get('/{mission}/preview', MissionsController::class . '@preview')->name('mission.preview');
 });
 
 Route::get('demo', MissionsController::class . '@demo');
