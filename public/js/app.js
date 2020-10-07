@@ -4920,8 +4920,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     };
   },
   mounted: function mounted() {
-    this.width = document.getElementById('main').offsetWidth;
-    this.height = document.getElementById('main').offsetHeight;
+    var _this = this;
+
+    setTimeout(function () {
+      _this.width = document.getElementById('main').offsetWidth;
+      _this.height = document.getElementById('main').offsetHeight;
+    }, 500);
     this.scale = Math.ceil(this.width / 100);
     this.restart();
   },

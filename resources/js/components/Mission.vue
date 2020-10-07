@@ -134,8 +134,10 @@ export default {
     },
 
     mounted() {
-        this.width = document.getElementById('main').offsetWidth;
-        this.height = document.getElementById('main').offsetHeight;
+        setTimeout(()=>{
+            this.width = document.getElementById('main').offsetWidth;
+            this.height = document.getElementById('main').offsetHeight;
+        }, 500);
         this.scale = Math.ceil(this.width / 100);
 
         this.restart();

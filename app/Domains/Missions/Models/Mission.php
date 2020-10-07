@@ -50,13 +50,8 @@ class Mission extends Model
         return $this->belongsToMany(Game::class);
     }
 
-    public function getImageAttribute()
-    {
-        return asset($this->attributes['image']);
-    }
-
     public function imageUrl() : string
     {
-        return Str::replaceFirst('public', 'storage', $this->image);
+        return url(Str::replaceFirst('public', 'storage', $this->image));
     }
 }
