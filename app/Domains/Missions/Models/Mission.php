@@ -57,6 +57,6 @@ class Mission extends Model
 
     public function imageUrl() : string
     {
-        return url('/storage/' . $this->image);
+        return Str::replaceFirst('public', 'storage', $this->image);
     }
 }
