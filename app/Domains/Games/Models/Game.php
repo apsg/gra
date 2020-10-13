@@ -56,6 +56,15 @@ class Game extends Model
         ];
     }
 
+    public function hasMission($mission) : bool
+    {
+        if ($mission instanceof Mission) {
+            $mission = $mission->id;
+        }
+
+        return $this->missions->contains('id', $mission);
+    }
+
     public function scopeGlobal($query)
     {
         return $query->whereNull('user_id');

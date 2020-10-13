@@ -5,6 +5,7 @@ use App\Domains\Games\Models\Game;
 use App\Domains\Missions\Scopes\MissionScopes;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -19,6 +20,8 @@ use Illuminate\Support\Str;
  *
  * @property-read User|null user
  * @property-read Answer[]  answers
+ *
+ * @method static Builder forUser(User $user)
  */
 class Mission extends Model
 {
@@ -62,5 +65,13 @@ class Mission extends Model
     public function getImageUrlAttribute() : string
     {
         return $this->imageUrl();
+    }
+
+    public function scopeForUser($query, User $user)
+    {
+        $query->where(function ($query) use ($user) {
+            $query->whereNull('user_id')
+                ->orWhere('user_id', $user->id);
+        });
     }
 }

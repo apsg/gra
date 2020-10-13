@@ -40,12 +40,12 @@
                                 @foreach($games as $game)
                                     <tr>
                                         <td>
-                                            <a href="{{ route('game.edit', $game) }}">
+                                            <a href="{{ route('games.edit', $game) }}">
                                                 {{ $game->title }}
                                             </a>
                                         </td>
                                         <td>
-                                            <form action="{{ route('game.delete', $game) }}"
+                                            <form action="{{ route('games.delete', $game) }}"
                                                   method="post"
                                                   class="d-inline-block">
                                                 @csrf
@@ -54,8 +54,14 @@
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
-                                            <a href="{{ route('game.edit', $game) }}" class="btn btn-primary">
+                                            <a href="{{ route('games.edit', $game) }}" class="btn btn-primary">
                                                 <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a href="{{ route('game.play', $game) }}"
+                                               class="btn btn-secondary mx-1"
+                                               target="_blank"
+                                            >
+                                                <i class="fa fa-play"></i> Zagraj
                                             </a>
                                         </td>
                                     </tr>

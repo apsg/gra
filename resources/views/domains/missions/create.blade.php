@@ -20,12 +20,6 @@
                             </div>
                         @endif
 
-                        @if (session('errors'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('errors') }}
-                            </div>
-                        @endif
-
                         <form action="{{ route('mission.store') }}"
                               method="post"
                               enctype="multipart/form-data">

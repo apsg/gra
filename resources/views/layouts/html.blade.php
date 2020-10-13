@@ -21,12 +21,12 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    @yield('head')
+    @stack('head')
 </head>
 <body @yield('body')>
 
 @yield('app')
 
-@yield('body-end')
+@stack('body-end')
 </body>
 </html>

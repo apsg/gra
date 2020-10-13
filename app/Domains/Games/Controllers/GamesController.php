@@ -2,6 +2,7 @@
 namespace App\Domains\Games\Controllers;
 
 use App\Domains\Games\Models\Game;
+use App\Domains\Games\Repositories\GamesRepository;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,5 +19,24 @@ class GamesController extends Controller
         $games = Auth::user()->games;
 
         return view('domains.games.index')->with(compact('gamesGlobal', 'games'));
+    }
+
+    public function create(GamesRepository $repository)
+    {
+        $game = $repository->createBlank(Auth::user());
+
+        return redirect(route('games.edit', $game));
+    }
+
+    public function show(Game $game)
+    {
+        return view('domains.games.edit')->with(compact('game'));
+    }
+
+    public function delete(Game $game)
+    {
+        $game->delete();
+
+        return back()->with('status', 'Usunięto pomyślnie');
     }
 }

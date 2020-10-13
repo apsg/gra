@@ -1,6 +1,7 @@
 <?php
 
 use App\Domains\Games\Controllers\GamesController;
+use App\Domains\Games\Models\Game;
 use App\Domains\Missions\Controllers\MissionsController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,7 +36,9 @@ Route::group(['prefix' => 'missions', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => 'games', 'middleware' => 'auth'], function () {
     Route::get('/', GamesController::class . '@index')->name('games.index');
     Route::post('/', GamesController::class . '@store')->name('games.store');
-    Route::get('/create', GamesController::class . '@create')->name('games.create');
+    Route::get('/create', GamesController::class . '@create')
+        ->middleware('can:create,' . Game::class)
+        ->name('games.create');
     Route::get('/{game}', GamesController::class . '@show')->name('games.edit');
     Route::delete('/{game}', GamesController::class . '@delete')->name('games.delete');
 });
@@ -43,5 +46,5 @@ Route::group(['prefix' => 'games', 'middleware' => 'auth'], function () {
 Route::get('demo', MissionsController::class . '@demo');
 
 Route::group(['prefix' => 'game', 'middleware' => 'auth'], function () {
-    Route::get('/{game}', GamesController::class . '@preview');
+    Route::get('/{game}', GamesController::class . '@preview')->name('game.play');
 });

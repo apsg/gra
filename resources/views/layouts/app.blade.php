@@ -1,5 +1,13 @@
 @extends('layouts.html')
 
+@push('head')
+    @livewireStyles()
+@endpush
+
+@push('body-end')
+    @livewireScripts()
+@endpush
+
 @section('app')
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -63,6 +71,18 @@
         </nav>
 
         <main class="py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        @if (session('errors'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('errors') }}
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
             @yield('content')
         </main>
     </div>
