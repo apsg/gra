@@ -21,7 +21,7 @@
                         <div class="alert alert-info">
                             <h3>Gry globalne dostępne dla ciebie:</h3>
                             @foreach($gamesGlobal as $game)
-                                <a href="#">
+                                <a href="{{ route('game.play', $game) }}" target="_blank">
                                     {{ $game->title }}
                                 </a>
                                 <br/>
