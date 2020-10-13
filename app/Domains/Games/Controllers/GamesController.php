@@ -14,9 +14,9 @@ class GamesController extends Controller
 
     public function index()
     {
-        $globalGames = Game::global()->get();
+        $gamesGlobal = Game::global()->get();
         $games = Auth::user()->games;
 
-        return view('domains.games.index')->with(compact('globalGames', 'games'));
+        return view('domains.games.index')->with(compact('gamesGlobal', 'games'));
     }
 }

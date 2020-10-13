@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(MissionsSeeder::class);
         $this->call(GameSeeder::class);
+        $this->call(RolesSeeder::class);
     }
 }
