@@ -35,6 +35,10 @@ class Mission extends Model
         'answers',
     ];
 
+    protected $appends = [
+        'image_url',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -53,5 +57,10 @@ class Mission extends Model
     public function imageUrl() : string
     {
         return url(Str::replaceFirst('public', 'storage', $this->image));
+    }
+
+    public function getImageUrlAttribute() : string
+    {
+        return $this->imageUrl();
     }
 }

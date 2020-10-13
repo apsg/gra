@@ -41650,7 +41650,7 @@ var render = function() {
       _c("mission", {
         ref: "mission",
         attrs: {
-          image: _vm.missions[_vm.currentMission].image,
+          image: _vm.missions[_vm.currentMission].image_url,
           answers: _vm.missions[_vm.currentMission].answers,
           avatar: "/images/mushroom.png"
         },

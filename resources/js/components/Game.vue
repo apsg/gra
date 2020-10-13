@@ -7,7 +7,7 @@
         </transition>
         <mission
             ref="mission"
-            :image="missions[currentMission].image"
+            :image="missions[currentMission].image_url"
             :answers="missions[currentMission].answers"
             avatar="/images/mushroom.png"
             v-on:success="nextMission"
