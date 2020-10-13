@@ -134,7 +134,7 @@ export default {
     },
 
     mounted() {
-        setTimeout(()=>{
+        setTimeout(() => {
             this.width = document.getElementById('main').offsetWidth;
             this.height = document.getElementById('main').offsetHeight;
         }, 500);

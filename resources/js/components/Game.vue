@@ -1,5 +1,5 @@
 <template>
-    <div class="game">
+    <div class="game bg-blue">
         <transition name="fade">
             <text-box v-if="isShowText">
                 {{ text }}
