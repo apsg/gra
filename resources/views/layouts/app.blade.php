@@ -20,6 +20,9 @@
                         <li class="nav-item">
                             <a href="{{ route('mission.index') }}" class="nav-link">Misje</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('games.index') }}" class="nav-link">Gry</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

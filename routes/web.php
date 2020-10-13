@@ -32,8 +32,16 @@ Route::group(['prefix' => 'missions', 'middleware' => 'auth'], function () {
     Route::get('/{mission}/preview', MissionsController::class . '@preview')->name('mission.preview');
 });
 
+Route::group(['prefix' => 'games', 'middleware' => 'auth'], function () {
+    Route::get('/', GamesController::class . '@index')->name('games.index');
+    Route::post('/', GamesController::class . '@store')->name('games.store');
+    Route::get('/create', GamesController::class . '@create')->name('games.create');
+    Route::get('/{game}', GamesController::class . '@show')->name('games.edit');
+    Route::delete('/{game}', GamesController::class . '@delete')->name('games.delete');
+});
+
 Route::get('demo', MissionsController::class . '@demo');
 
 Route::group(['prefix' => 'game', 'middleware' => 'auth'], function () {
-    Route::get('/{game}', GamesController::class . '@show');
+    Route::get('/{game}', GamesController::class . '@preview');
 });

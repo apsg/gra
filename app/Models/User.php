@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Domains\Games\Models\Game;
 use App\Domains\Missions\Models\Mission;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -20,6 +21,7 @@ use Illuminate\Support\Collection;
  * @property Carbon                    updated_at
  *
  * @property-read Mission[]|Collection missions
+ * @property-read Game[]|Collection games
  */
 class User extends Authenticatable
 {
@@ -58,5 +60,10 @@ class User extends Authenticatable
     public function missions()
     {
         return $this->hasMany(Mission::class);
+    }
+
+    public function games()
+    {
+        return $this->hasMany(Game::class);
     }
 }

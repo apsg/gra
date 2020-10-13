@@ -4,6 +4,7 @@ namespace App\Domains\Games\Models;
 use App\Domains\Missions\Models\Mission;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
@@ -16,6 +17,7 @@ use Illuminate\Support\Collection;
  *
  * @property-read User                 user
  * @property-read Mission[]|Collection missions
+ * @method static Builder global()
  */
 class Game extends Model
 {
@@ -52,5 +54,10 @@ class Game extends Model
                 'url'  => asset('images/cat.png'),
             ],
         ];
+    }
+
+    public function scopeGlobal($query)
+    {
+        return $query->whereNull('user_id');
     }
 }
