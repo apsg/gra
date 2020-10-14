@@ -201,13 +201,14 @@ export default {
             const avatarRect = this.$refs.avatar.$el.getBoundingClientRect();
 
             for (let answer of this.$refs.answers) {
-                // We do not care for incorrect objects
-                if (!answer.correct)
+                if (!answer.checkCollide(avatarRect))
                     continue;
 
-                if (answer.checkCollide(avatarRect)) {
+                if (answer.correct) {
                     console.log('trafiony');
                     this.success();
+                } else {
+                    this.$emit('incorrect', 1);
                 }
             }
         },

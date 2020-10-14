@@ -11,6 +11,7 @@
             :answers="missions[currentMission].answers"
             avatar="/images/mushroom.png"
             v-on:success="nextMission"
+            v-on:incorrect="incorrect++"
         ></mission>
     </div>
 </template>
@@ -47,6 +48,8 @@ export default {
             start: false,
             isShowText: false,
             text: "",
+            correct: 0,
+            incorrect: 0,
         }
     },
 
@@ -61,9 +64,11 @@ export default {
         },
 
         nextMission() {
-            if (this.winning === true)
+            if (this.winning === true) {
                 return;
+            }
 
+            this.correct++;
             this.points += 10;
 
             if (this.currentMission === this.missions.length - 1) {
@@ -94,7 +99,9 @@ export default {
         },
 
         winText(points) {
-            return 'Wygrana! \n Zdobyto: ' + points + ' pkt.';
+            return 'Wygrana! \n Zdobyto: ' + points + ' pkt.'
+                + '\n Poprawnych odpowiedzi: ' + this.correct
+                + '\n Błędnych odpowiedzi: ' + this.incorrect;
         }
     }
 }

@@ -4588,6 +4588,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Game",
@@ -4614,7 +4615,9 @@ __webpack_require__.r(__webpack_exports__);
       currentMission: 0,
       start: false,
       isShowText: false,
-      text: ""
+      text: "",
+      correct: 0,
+      incorrect: 0
     };
   },
   mounted: function mounted() {
@@ -4626,7 +4629,11 @@ __webpack_require__.r(__webpack_exports__);
       this.showText(this.missionText(this.currentMission + 1));
     },
     nextMission: function nextMission() {
-      if (this.winning === true) return;
+      if (this.winning === true) {
+        return;
+      }
+
+      this.correct++;
       this.points += 10;
 
       if (this.currentMission === this.missions.length - 1) {
@@ -4652,7 +4659,7 @@ __webpack_require__.r(__webpack_exports__);
       return 'Misja: ' + mission;
     },
     winText: function winText(points) {
-      return 'Wygrana! \n Zdobyto: ' + points + ' pkt.';
+      return 'Wygrana! \n Zdobyto: ' + points + ' pkt.' + '\n Poprawnych odpowiedzi: ' + this.correct + '\n Błędnych odpowiedzi: ' + this.incorrect;
     }
   }
 });
@@ -5009,12 +5016,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       try {
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
           var answer = _step2.value;
-          // We do not care for incorrect objects
-          if (!answer.correct) continue;
+          if (!answer.checkCollide(avatarRect)) continue;
 
-          if (answer.checkCollide(avatarRect)) {
+          if (answer.correct) {
             console.log('trafiony');
             this.success();
+          } else {
+            this.$emit('incorrect', 1);
           }
         }
       } catch (err) {
@@ -41945,7 +41953,12 @@ var render = function() {
           answers: _vm.missions[_vm.currentMission].answers,
           avatar: "/images/mushroom.png"
         },
-        on: { success: _vm.nextMission }
+        on: {
+          success: _vm.nextMission,
+          incorrect: function($event) {
+            _vm.incorrect++
+          }
+        }
       })
     ],
     1
