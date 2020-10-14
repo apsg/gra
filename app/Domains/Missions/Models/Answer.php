@@ -28,6 +28,10 @@ class Answer extends Model
         'mission_id',
     ];
 
+    protected $casts = [
+        'is_correct' => 'bool',
+    ];
+
     public function mission()
     {
         return $this->belongsTo(Mission::class);
