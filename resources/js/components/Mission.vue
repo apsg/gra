@@ -21,13 +21,7 @@
                     <i class="fa fa-gamepad"></i>
                 </button>
             </div>
-            <div class="speed-selector">
-                <button class="btn btn-sm btn-outline-secondary" @click.prevent="speedMinus"><i class="fa fa-minus"></i>
-                </button>
-                <speed-indicator :speed="speed"></speed-indicator>
-                <button class="btn btn-sm btn-outline-secondary" @click.prevent="speedPlus"><i class="fa fa-plus"></i>
-                </button>
-            </div>
+            <speed-selector :speed="speed" v-on:change="setSpeed"></speed-selector>
             <div class="avatar-selector">
                 <button class="btn btn-secondary">
                     <i class="fa fa-smile-o"></i>
@@ -93,7 +87,7 @@ import KeyboardInput from "./KeyboardInput";
 import MouseInput from "./MouseInput";
 import Avatar from "./Avatar";
 import Answer from "./Answer";
-import SpeedIndicator from "./SpeedIndicator";
+import SpeedSelector from "./SpeedSelector";
 import {BUTTON_FIRE} from "../constants";
 import {collision} from "../helpers";
 
@@ -125,7 +119,7 @@ export default {
         MouseInput,
         KeyboardInput,
         GamepadInput,
-        SpeedIndicator
+        SpeedSelector
     },
 
     data() {
@@ -240,14 +234,8 @@ export default {
             }
         },
 
-        speedMinus() {
-            if (this.speed > 1)
-                this.speed--;
-        },
-
-        speedPlus() {
-            if (this.speed < 5)
-                this.speed++;
+        setSpeed(value) {
+            this.speed = value;
         }
     }
 }

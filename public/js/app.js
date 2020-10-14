@@ -4803,7 +4803,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _MouseInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MouseInput */ "./resources/js/components/MouseInput.vue");
 /* harmony import */ var _Avatar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Avatar */ "./resources/js/components/Avatar.vue");
 /* harmony import */ var _Answer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Answer */ "./resources/js/components/Answer.vue");
-/* harmony import */ var _SpeedIndicator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SpeedIndicator */ "./resources/js/components/SpeedIndicator.vue");
+/* harmony import */ var _SpeedSelector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SpeedSelector */ "./resources/js/components/SpeedSelector.vue");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../constants */ "./resources/js/constants.js");
 /* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../helpers */ "./resources/js/helpers.js");
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -4812,12 +4812,6 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -4935,7 +4929,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     MouseInput: _MouseInput__WEBPACK_IMPORTED_MODULE_2__["default"],
     KeyboardInput: _KeyboardInput__WEBPACK_IMPORTED_MODULE_1__["default"],
     GamepadInput: _GamepadInput__WEBPACK_IMPORTED_MODULE_0__["default"],
-    SpeedIndicator: _SpeedIndicator__WEBPACK_IMPORTED_MODULE_5__["default"]
+    SpeedSelector: _SpeedSelector__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   data: function data() {
     return {
@@ -5046,11 +5040,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         }
       }
     },
-    speedMinus: function speedMinus() {
-      if (this.speed > 1) this.speed--;
-    },
-    speedPlus: function speedPlus() {
-      if (this.speed < 5) this.speed++;
+    setSpeed: function setSpeed(value) {
+      this.speed = value;
     }
   }
 });
@@ -5125,6 +5116,72 @@ __webpack_require__.r(__webpack_exports__);
     getClass: function getClass(id) {
       if (id <= this.speed) return 'fa-star';
       return 'fa-star-o';
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SpeedSelector.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SpeedSelector.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SpeedIndicator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SpeedIndicator */ "./resources/js/components/SpeedIndicator.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "SpeedSelector",
+  components: {
+    SpeedIndicator: _SpeedIndicator__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: {
+    min: {
+      type: Number,
+      "default": 1
+    },
+    max: {
+      type: Number,
+      "default": 5
+    },
+    speed: {
+      type: Number,
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      currentSpeed: 3
+    };
+  },
+  mounted: function mounted() {
+    this.currentSpeed = this.speed;
+  },
+  methods: {
+    speedMinus: function speedMinus() {
+      if (this.currentSpeed > this.min) {
+        this.currentSpeed--;
+        this.$emit('change', this.currentSpeed);
+      }
+    },
+    speedPlus: function speedPlus() {
+      if (this.currentSpeed < this.max) {
+        this.currentSpeed++;
+        this.$emit('change', this.currentSpeed);
+      }
     }
   }
 });
@@ -41923,90 +41980,63 @@ var render = function() {
       attrs: { id: "main" }
     },
     [
-      _c("div", { staticClass: "navigation d-flex justify-content-between" }, [
-        _c("div", { staticClass: "inputs-selector btn-group" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn",
-              class: _vm.inputs.keyboard ? "btn-primary" : "btn-secondary",
-              on: {
-                click: function($event) {
-                  _vm.inputs.keyboard = !_vm.inputs.keyboard
-                }
-              }
-            },
-            [_c("i", { staticClass: "fa fa-keyboard-o" })]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn",
-              class: _vm.inputs.mouse ? "btn-primary" : "btn-secondary",
-              on: {
-                click: function($event) {
-                  _vm.inputs.mouse = !_vm.inputs.mouse
-                }
-              }
-            },
-            [_c("i", { staticClass: "fa fa-mouse-pointer" })]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn",
-              class: _vm.inputs.gamepad ? "btn-primary" : "btn-secondary",
-              on: {
-                click: function($event) {
-                  _vm.inputs.gamepad = !_vm.inputs.gamepad
-                }
-              }
-            },
-            [_c("i", { staticClass: "fa fa-gamepad" })]
-          )
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "speed-selector" },
-          [
+      _c(
+        "div",
+        { staticClass: "navigation d-flex justify-content-between" },
+        [
+          _c("div", { staticClass: "inputs-selector btn-group" }, [
             _c(
               "button",
               {
-                staticClass: "btn btn-sm btn-outline-secondary",
+                staticClass: "btn",
+                class: _vm.inputs.keyboard ? "btn-primary" : "btn-secondary",
                 on: {
                   click: function($event) {
-                    $event.preventDefault()
-                    return _vm.speedMinus($event)
+                    _vm.inputs.keyboard = !_vm.inputs.keyboard
                   }
                 }
               },
-              [_c("i", { staticClass: "fa fa-minus" })]
+              [_c("i", { staticClass: "fa fa-keyboard-o" })]
             ),
             _vm._v(" "),
-            _c("speed-indicator", { attrs: { speed: _vm.speed } }),
+            _c(
+              "button",
+              {
+                staticClass: "btn",
+                class: _vm.inputs.mouse ? "btn-primary" : "btn-secondary",
+                on: {
+                  click: function($event) {
+                    _vm.inputs.mouse = !_vm.inputs.mouse
+                  }
+                }
+              },
+              [_c("i", { staticClass: "fa fa-mouse-pointer" })]
+            ),
             _vm._v(" "),
             _c(
               "button",
               {
-                staticClass: "btn btn-sm btn-outline-secondary",
+                staticClass: "btn",
+                class: _vm.inputs.gamepad ? "btn-primary" : "btn-secondary",
                 on: {
                   click: function($event) {
-                    $event.preventDefault()
-                    return _vm.speedPlus($event)
+                    _vm.inputs.gamepad = !_vm.inputs.gamepad
                   }
                 }
               },
-              [_c("i", { staticClass: "fa fa-plus" })]
+              [_c("i", { staticClass: "fa fa-gamepad" })]
             )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _vm._m(0)
-      ]),
+          ]),
+          _vm._v(" "),
+          _c("speed-selector", {
+            attrs: { speed: _vm.speed },
+            on: { change: _vm.setSpeed }
+          }),
+          _vm._v(" "),
+          _vm._m(0)
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "elements" }, [
         _vm._v(
@@ -42149,6 +42179,65 @@ var render = function() {
       _vm._v(" "),
       _c("i", { staticClass: "fa", class: _vm.getClass(5) })
     ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SpeedSelector.vue?vue&type=template&id=4b1829eb&scoped=true&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SpeedSelector.vue?vue&type=template&id=4b1829eb&scoped=true& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "speed-selector" },
+    [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-sm btn-outline-secondary",
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.speedMinus($event)
+            }
+          }
+        },
+        [_c("i", { staticClass: "fa fa-minus" })]
+      ),
+      _vm._v(" "),
+      _c("speed-indicator", { attrs: { speed: _vm.currentSpeed } }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-sm btn-outline-secondary",
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.speedPlus($event)
+            }
+          }
+        },
+        [_c("i", { staticClass: "fa fa-plus" })]
+      )
+    ],
+    1
   )
 }
 var staticRenderFns = []
@@ -55247,6 +55336,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SpeedIndicator_vue_vue_type_template_id_f154b69a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SpeedIndicator_vue_vue_type_template_id_f154b69a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/SpeedSelector.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/SpeedSelector.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SpeedSelector_vue_vue_type_template_id_4b1829eb_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SpeedSelector.vue?vue&type=template&id=4b1829eb&scoped=true& */ "./resources/js/components/SpeedSelector.vue?vue&type=template&id=4b1829eb&scoped=true&");
+/* harmony import */ var _SpeedSelector_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SpeedSelector.vue?vue&type=script&lang=js& */ "./resources/js/components/SpeedSelector.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SpeedSelector_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SpeedSelector_vue_vue_type_template_id_4b1829eb_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SpeedSelector_vue_vue_type_template_id_4b1829eb_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "4b1829eb",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/SpeedSelector.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/SpeedSelector.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/SpeedSelector.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SpeedSelector_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./SpeedSelector.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SpeedSelector.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SpeedSelector_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/SpeedSelector.vue?vue&type=template&id=4b1829eb&scoped=true&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/SpeedSelector.vue?vue&type=template&id=4b1829eb&scoped=true& ***!
+  \**********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SpeedSelector_vue_vue_type_template_id_4b1829eb_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./SpeedSelector.vue?vue&type=template&id=4b1829eb&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SpeedSelector.vue?vue&type=template&id=4b1829eb&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SpeedSelector_vue_vue_type_template_id_4b1829eb_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SpeedSelector_vue_vue_type_template_id_4b1829eb_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
