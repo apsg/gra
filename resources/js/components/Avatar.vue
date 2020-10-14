@@ -39,4 +39,7 @@ export default {
 </script>
 
 <style scoped>
+.avatar {
+    pointer-events: none;
+}
 </style>

@@ -55,8 +55,7 @@
                                                 </button>
                                             </form>
                                             <a href="{{ route('games.edit', $game) }}" class="btn btn-primary">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
+                                                <i class="fa fa-edit"></i></a>                                            </a>
                                             <a href="{{ route('game.play', $game) }}"
                                                class="btn btn-secondary mx-1"
                                                target="_blank"

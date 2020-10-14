@@ -73,6 +73,7 @@
         <mouse-input
             :disabled="!inputs.mouse"
             v-on:move="moveMouse"
+            v-on:button="button"
         ></mouse-input>
     </div>
 </template>
