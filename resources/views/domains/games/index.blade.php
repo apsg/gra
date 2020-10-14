@@ -1,12 +1,14 @@
 @extends('layouts.app')
 
+@section('title', 'Gry')
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        Misje
+                        Gry
                         <a href="{{ route('games.create') }}" class="btn btn-primary pull-right">
                             <i class="fa fa-plus"></i> Dodaj nową grę
                         </a>
@@ -22,7 +24,7 @@
                             <h3>Gry globalne dostępne dla ciebie:</h3>
                             @foreach($gamesGlobal as $game)
                                 <a href="{{ route('game.play', $game) }}" target="_blank">
-                                    {{ $game->title }}
+                                    {{ $game->title }} (Misji: {{ $game->missions()->count() }})
                                 </a>
                                 <br/>
                             @endforeach
@@ -41,7 +43,7 @@
                                     <tr>
                                         <td>
                                             <a href="{{ route('games.edit', $game) }}">
-                                                {{ $game->title }}
+                                                {{ $game->title }} (Misji: {{ $game->missions()->count() }})
                                             </a>
                                         </td>
                                         <td>

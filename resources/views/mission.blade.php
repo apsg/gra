@@ -1,5 +1,7 @@
 @extends('layouts.game')
 
+@section('title', 'Misja ' . $mission->title )
+
 @section('content')
     <mission
         image="{{ $mission->imageUrl() }}"

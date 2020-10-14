@@ -1,5 +1,6 @@
 @extends('layouts.game')
 
+@section('title', 'Gra')
 
 @section('content')
     <game
