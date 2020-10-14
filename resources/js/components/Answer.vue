@@ -87,8 +87,8 @@ export default {
         },
 
         move() {
-            this.x = Math.floor(this.x + this.dx * this.speed * Math.random());
-            this.y = Math.floor(this.y + this.dy * this.speed * Math.random());
+            this.x = (this.x + this.dx * this.speed * Math.random());
+            this.y = (this.y + this.dy * this.speed * Math.random());
 
             this.normalize();
 

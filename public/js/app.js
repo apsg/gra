@@ -4468,8 +4468,8 @@ __webpack_require__.r(__webpack_exports__);
       return true;
     },
     move: function move() {
-      this.x = Math.floor(this.x + this.dx * this.speed * Math.random());
-      this.y = Math.floor(this.y + this.dy * this.speed * Math.random());
+      this.x = this.x + this.dx * this.speed * Math.random();
+      this.y = this.y + this.dy * this.speed * Math.random();
       this.normalize();
       this.$emit(_constants__WEBPACK_IMPORTED_MODULE_0__["EVENT_MOVE"], {
         x: this.x,
@@ -4899,6 +4899,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
 
 
 
@@ -5043,6 +5045,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           this.$refs.answers[i].avoidCollision(collisionResult);
         }
       }
+    },
+    speedMinus: function speedMinus() {
+      if (this.speed > 1) this.speed--;
+    },
+    speedPlus: function speedPlus() {
+      if (this.speed < 5) this.speed++;
     }
   }
 });
@@ -5112,7 +5120,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SpeedIndicator",
-  props: ['speed']
+  props: ['speed'],
+  methods: {
+    getClass: function getClass(id) {
+      if (id <= this.speed) return 'fa-star';
+      return 'fa-star-o';
+    }
+  }
 });
 
 /***/ }),
@@ -9674,7 +9688,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".speed-indicator[data-v-f154b69a] {\n  color: white;\n}", ""]);
+exports.push([module.i, ".speed-indicator[data-v-f154b69a] {\n  font-size: 20px;\n  line-height: 1;\n  height: 100%;\n}", ""]);
 
 // exports
 
@@ -41958,16 +41972,40 @@ var render = function() {
           "div",
           { staticClass: "speed-selector" },
           [
-            _vm._m(0),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-sm btn-outline-secondary",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.speedMinus($event)
+                  }
+                }
+              },
+              [_c("i", { staticClass: "fa fa-minus" })]
+            ),
             _vm._v(" "),
             _c("speed-indicator", { attrs: { speed: _vm.speed } }),
             _vm._v(" "),
-            _vm._m(1)
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-sm btn-outline-secondary",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.speedPlus($event)
+                  }
+                }
+              },
+              [_c("i", { staticClass: "fa fa-plus" })]
+            )
           ],
           1
         ),
         _vm._v(" "),
-        _vm._m(2)
+        _vm._m(0)
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "elements" }, [
@@ -42042,22 +42080,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "btn btn-outline-secondary" }, [
-      _c("i", { staticClass: "fa fa-minus" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "btn btn-outline-secondary" }, [
-      _c("i", { staticClass: "fa fa-plus" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "avatar-selector" }, [
       _c("button", { staticClass: "btn btn-secondary" }, [
         _c("i", { staticClass: "fa fa-smile-o" })
@@ -42113,30 +42135,23 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "d-inline-block speed-indicator color-red" },
+    [
+      _c("i", { staticClass: "fa", class: _vm.getClass(1) }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fa", class: _vm.getClass(2) }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fa", class: _vm.getClass(3) }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fa", class: _vm.getClass(4) }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fa", class: _vm.getClass(5) })
+    ]
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "d-inline-block speed-indicator border rounded" },
-      [
-        _c("i", { staticClass: "fa fa-bolt fa-2x" }),
-        _vm._v(" "),
-        _c("i", { staticClass: "fa fa-bolt fa-2x" }),
-        _vm._v(" "),
-        _c("i", { staticClass: "fa fa-bolt fa-2x" }),
-        _vm._v(" "),
-        _c("i", { staticClass: "fa fa-bolt fa-2x" }),
-        _vm._v(" "),
-        _c("i", { staticClass: "fa fa-bolt fa-2x" })
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

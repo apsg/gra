@@ -22,9 +22,11 @@
                 </button>
             </div>
             <div class="speed-selector">
-                <button class="btn btn-outline-secondary"><i class="fa fa-minus"></i></button>
+                <button class="btn btn-sm btn-outline-secondary" @click.prevent="speedMinus"><i class="fa fa-minus"></i>
+                </button>
                 <speed-indicator :speed="speed"></speed-indicator>
-                <button class="btn btn-outline-secondary"><i class="fa fa-plus"></i></button>
+                <button class="btn btn-sm btn-outline-secondary" @click.prevent="speedPlus"><i class="fa fa-plus"></i>
+                </button>
             </div>
             <div class="avatar-selector">
                 <button class="btn btn-secondary">
@@ -236,6 +238,16 @@ export default {
                     this.$refs.answers[i].avoidCollision(collisionResult);
                 }
             }
+        },
+
+        speedMinus() {
+            if (this.speed > 1)
+                this.speed--;
+        },
+
+        speedPlus() {
+            if (this.speed < 5)
+                this.speed++;
         }
     }
 }
