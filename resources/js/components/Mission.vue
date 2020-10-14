@@ -21,6 +21,11 @@
                     <i class="fa fa-gamepad"></i>
                 </button>
             </div>
+            <div class="speed-selector">
+                <button class="btn btn-outline-secondary"><i class="fa fa-minus"></i></button>
+                <speed-indicator :speed="speed"></speed-indicator>
+                <button class="btn btn-outline-secondary"><i class="fa fa-plus"></i></button>
+            </div>
             <div class="avatar-selector">
                 <button class="btn btn-secondary">
                     <i class="fa fa-smile-o"></i>
@@ -44,6 +49,8 @@
                 :text="answer.text"
                 :correct="!!answer.is_correct"
                 :stop="stop"
+                :speed="speed"
+                v-on:move="checkAnswersCollisions(id)"
         ></answer>
 
         <avatar
@@ -84,7 +91,9 @@ import KeyboardInput from "./KeyboardInput";
 import MouseInput from "./MouseInput";
 import Avatar from "./Avatar";
 import Answer from "./Answer";
+import SpeedIndicator from "./SpeedIndicator";
 import {BUTTON_FIRE} from "../constants";
+import {collision} from "../helpers";
 
 export default {
     name: 'Mission',
@@ -113,7 +122,8 @@ export default {
         Avatar,
         MouseInput,
         KeyboardInput,
-        GamepadInput
+        GamepadInput,
+        SpeedIndicator
     },
 
     data() {
@@ -130,7 +140,8 @@ export default {
                 gamepad: true,
                 keyboard: true,
             },
-            stop: false
+            stop: false,
+            speed: 3,
         }
     },
 
@@ -208,8 +219,24 @@ export default {
         success() {
             this.stop = true;
             this.$emit('success', 1);
-        }
+        },
 
+        checkAnswersCollisions(id) {
+            const answerCount = this.$refs.answers.length;
+            let i;
+
+            for (i = id + 1; i < answerCount; i++) {
+                let collisionResult = collision(
+                    this.$refs.answers[id].$el.getBoundingClientRect(),
+                    this.$refs.answers[i].$el.getBoundingClientRect()
+                );
+
+                if (collisionResult !== false) {
+                    this.$refs.answers[id].avoidCollision(collisionResult);
+                    this.$refs.answers[i].avoidCollision(collisionResult);
+                }
+            }
+        }
     }
 }
 </script>

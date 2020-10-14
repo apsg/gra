@@ -6,6 +6,10 @@ export const EVENT_MOVE_X = 'move-x';
 export const EVENT_MOVE_Y = 'move-y';
 export const EVENT_BUTTON = 'button';
 
+export const ESCAPE_SPEED = 2;
+export const COLLISION_THRESHOLD = 10;
+export const ANSWER_MOVE_TICK = 100;
+
 export const GAMEPAD = {
     fireButtons: [
         'RIGHT_TOP_SHOULDER',

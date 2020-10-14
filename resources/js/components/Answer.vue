@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import {ANSWER_MOVE_TICK, ESCAPE_SPEED, EVENT_MOVE} from "../constants";
+
 export default {
     name: "Answer",
 
@@ -48,7 +50,7 @@ export default {
 
     mounted() {
         this.restart();
-        setTimeout(this.move, 300);
+        setTimeout(this.move, ANSWER_MOVE_TICK);
     },
 
     computed: {
@@ -90,8 +92,13 @@ export default {
 
             this.normalize();
 
+            this.$emit(EVENT_MOVE, {
+                x: this.x,
+                y: this.y,
+            });
+
             if (!this.stop)
-                setTimeout(this.move, 300);
+                setTimeout(this.move, ANSWER_MOVE_TICK);
         },
 
         normalize() {
@@ -113,6 +120,22 @@ export default {
             if (this.y < 0) {
                 this.y = 0;
                 this.dy = -this.dy;
+            }
+        },
+
+        avoidCollision(collisionResult) {
+            // Boxes overlap. Generate new position.
+            if (collisionResult.x === -1 && collisionResult.y === -1)
+                this.restart();
+
+            if (collisionResult.x !== 0) {
+                this.dx = collisionResult.x * this.dx;
+                this.x = this.x + this.dx * this.speed * ESCAPE_SPEED;
+            }
+
+            if (collisionResult.y !== 0) {
+                this.dy = collisionResult.y * this.dy;
+                this.y = this.y + this.dy * this.speed * ESCAPE_SPEED;
             }
         }
     }
