@@ -29,7 +29,7 @@ class Answer extends Model
     ];
 
     protected $casts = [
-        'is_correct' => 'bool',
+        'is_correct' => 'boolean',
     ];
 
     public function mission()
