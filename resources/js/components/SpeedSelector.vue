@@ -1,9 +1,9 @@
 <template>
     <div class="speed-selector">
-        <button class="btn btn-sm btn-outline-secondary" @click.prevent="speedMinus"><i class="fa fa-minus"></i>
+        <button class="btn btn-sm" @click.prevent="speedMinus"><i class="fa fa-minus"></i>
         </button>
         <speed-indicator :speed="currentSpeed"></speed-indicator>
-        <button class="btn btn-sm btn-outline-secondary" @click.prevent="speedPlus"><i class="fa fa-plus"></i>
+        <button class="btn btn-sm" @click.prevent="speedPlus"><i class="fa fa-plus"></i>
         </button>
     </div>
 </template>
@@ -62,5 +62,9 @@ export default {
 </script>
 
 <style scoped>
-
+.speed-selector {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #454d55;
+}
 </style>
