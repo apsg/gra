@@ -9905,7 +9905,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".win[data-v-ac87407a] {\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  z-index: 1000;\n}\n.win > div[data-v-ac87407a] {\n  font-size: 40px;\n  white-space: pre-line;\n}", ""]);
+exports.push([module.i, ".win[data-v-ac87407a] {\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  z-index: 1200;\n}\n.win > div[data-v-ac87407a] {\n  font-size: 40px;\n  white-space: pre-line;\n}", ""]);
 
 // exports
 

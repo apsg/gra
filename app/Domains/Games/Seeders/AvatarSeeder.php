@@ -10,7 +10,7 @@ class AvatarSeeder extends Seeder
     {
         return [
             'images/avatars/mushroom.png',
-            'images/avatars/mario-8-bit.gif',
+            'images/avatars/mario.png',
             'images/avatars/cat.png',
         ];
     }
