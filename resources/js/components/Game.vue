@@ -71,14 +71,24 @@ export default {
             this.correct++;
             this.points += 10;
 
+            this.$refs.mission.$refs.avatar.showScoreAnimation();
+
             if (this.currentMission === this.missions.length - 1) {
                 this.winning = true;
                 this.showText(this.winText(this.points), true);
                 return;
             }
 
-            this.currentMission += 1;
+            this.startNextMission();
+
+            // setTimeout(() => {
+            //     this.startNextMission()
+            // }, 1000);
+        },
+
+        startNextMission() {
             this.showText(this.missionText(this.currentMission + 1));
+            this.currentMission += 1;
             this.$refs.mission.restart();
         },
 
