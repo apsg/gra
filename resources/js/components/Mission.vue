@@ -22,10 +22,7 @@
                 </button>
             </div>
             <speed-selector :speed="speed" v-on:change="setSpeed"></speed-selector>
-            <div class="avatar-selector">
-                <button class="btn btn-secondary">
-                    <i class="fa fa-smile-o"></i>
-                </button>
+            <div>
             </div>
         </div>
         <div class="elements">

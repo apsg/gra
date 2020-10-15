@@ -9,21 +9,28 @@
             ref="mission"
             :image="missions[currentMission].image_url"
             :answers="missions[currentMission].answers"
-            avatar="/images/mushroom.png"
+            :avatar="selectedAvatar"
             v-on:success="nextMission"
             v-on:incorrect="incorrect++"
         ></mission>
+        <avatar-selector
+            :avatars="avatars"
+            v-on:avatar-change="changeAvatar"
+        >
+        </avatar-selector>
     </div>
 </template>
 
 <script>
 import TextBox from './TextBox';
+import AvatarSelector from "./AvatarSelector";
 
 export default {
     name: "Game",
 
     components: {
-        TextBox
+        TextBox,
+        AvatarSelector
     },
 
     props: {
@@ -50,6 +57,7 @@ export default {
             text: "",
             correct: 0,
             incorrect: 0,
+            selectedAvatar: '/images/avatars/mushroom.png'
         }
     },
 
@@ -112,6 +120,10 @@ export default {
             return 'Wygrana! \n Zdobyto: ' + points + ' pkt.'
                 + '\n Poprawnych odpowiedzi: ' + this.correct
                 + '\n Błędnych odpowiedzi: ' + this.incorrect;
+        },
+
+        changeAvatar(avatar) {
+            this.selectedAvatar = avatar;
         }
     }
 }

@@ -40,3 +40,15 @@ html, body {
 {
     opacity: 0;
 }
+
+.slide-enter-active, .slide-leave-active {
+    transition: right .5s ease-out;
+}
+
+.slide-enter, .slide-leave-to {
+    right: -100px;
+}
+
+.slide-enter-to, .slide-leave {
+    right: 0px;
+}
