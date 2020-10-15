@@ -1,6 +1,7 @@
 <?php
 namespace App\Domains\Games\Controllers;
 
+use App\Domains\Games\Models\Avatar;
 use App\Domains\Games\Models\Game;
 use App\Domains\Games\Repositories\GamesRepository;
 use App\Http\Controllers\Controller;
@@ -10,7 +11,10 @@ class GamesController extends Controller
 {
     public function preview(Game $game)
     {
-        return view('game')->with(compact('game'));
+        $avatars = Avatar::forUser(Auth::user())->get();
+
+        return view('game')
+            ->with(compact('game', 'avatars'));
     }
 
     public function index()

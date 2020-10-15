@@ -3,6 +3,7 @@ namespace App\Domains\Missions\Models;
 
 use App\Domains\Games\Models\Game;
 use App\Domains\Missions\Scopes\MissionScopes;
+use App\Models\Traits\HasImage;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -25,7 +26,7 @@ use Illuminate\Support\Str;
  */
 class Mission extends Model
 {
-    use MissionScopes;
+    use MissionScopes, HasImage;
 
     protected $fillable = [
         'image',
@@ -55,16 +56,6 @@ class Mission extends Model
     public function games()
     {
         return $this->belongsToMany(Game::class);
-    }
-
-    public function imageUrl() : string
-    {
-        return url(Str::replaceFirst('public', 'storage', $this->image));
-    }
-
-    public function getImageUrlAttribute() : string
-    {
-        return $this->imageUrl();
     }
 
     public function scopeForUser($query, User $user)
