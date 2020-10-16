@@ -33,10 +33,6 @@ export default {
             type: Number,
             default: 5
         },
-        stop: {
-            type: Boolean,
-            default: false
-        }
     },
 
     data() {
@@ -87,7 +83,7 @@ export default {
         },
 
         move() {
-            if (!this.stop) {
+            if (!this.$store.state.stop) {
                 this.x = (this.x + this.dx * this.speed * Math.random());
                 this.y = (this.y + this.dy * this.speed * Math.random());
 

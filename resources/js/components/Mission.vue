@@ -41,7 +41,6 @@
                 :maxHeight="height"
                 :text="answer.text"
                 :correct="!!answer.is_correct"
-                :stop="stop"
                 :speed="speed"
                 v-on:move="checkAnswersCollisions(id)"
         ></answer>
@@ -133,7 +132,6 @@ export default {
                 gamepad: true,
                 keyboard: true,
             },
-            stop: false,
             speed: 3,
         }
     },
@@ -154,7 +152,7 @@ export default {
             for (let answer of this.$refs.answers)
                 answer.restart();
 
-            this.stop = false;
+            this.$store.commit('start');
         },
 
         moveX(e) {
@@ -211,7 +209,7 @@ export default {
         },
 
         success() {
-            this.stop = true;
+            this.$store.commit('stop');
             this.$emit('success', 1);
         },
 

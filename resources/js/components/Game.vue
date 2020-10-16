@@ -7,8 +7,8 @@
         </transition>
         <mission
             ref="mission"
-            :image="missions[currentMission].image_url"
-            :answers="missions[currentMission].answers"
+            :image="missions[$store.state.currentMission].image_url"
+            :answers="missions[$store.state.currentMission].answers"
             :avatar="selectedAvatar"
             v-on:success="nextMission"
             v-on:incorrect="incorrect++"
@@ -51,7 +51,6 @@ export default {
     data() {
         return {
             points: 0,
-            currentMission: 0,
             start: false,
             isShowText: false,
             text: "",
@@ -68,7 +67,7 @@ export default {
     methods: {
         startGame() {
             this.start = true;
-            this.showText(this.missionText(this.currentMission + 1));
+            this.showText(this.missionText(this.$store.state.currentMission + 1));
         },
 
         nextMission() {
@@ -81,7 +80,7 @@ export default {
 
             this.$refs.mission.$refs.avatar.showScoreAnimation();
 
-            if (this.currentMission === this.missions.length - 1) {
+            if (this.$store.state.currentMission === this.missions.length - 1) {
                 this.winning = true;
                 this.showText(this.winText(this.points), true);
                 return;
@@ -93,8 +92,8 @@ export default {
         },
 
         startNextMission() {
-            this.showText(this.missionText(this.currentMission + 1));
-            this.currentMission += 1;
+            this.showText(this.missionText(this.$store.state.currentMission + 1));
+            this.$store.commit('nextMission');
             this.$refs.mission.restart();
         },
 
