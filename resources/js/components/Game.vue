@@ -87,11 +87,9 @@ export default {
                 return;
             }
 
-            this.startNextMission();
-
-            // setTimeout(() => {
-            //     this.startNextMission()
-            // }, 1000);
+            setTimeout(() => {
+                this.startNextMission()
+            }, 1000);
         },
 
         startNextMission() {

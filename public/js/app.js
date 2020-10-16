@@ -4468,14 +4468,17 @@ __webpack_require__.r(__webpack_exports__);
       return true;
     },
     move: function move() {
-      this.x = this.x + this.dx * this.speed * Math.random();
-      this.y = this.y + this.dy * this.speed * Math.random();
-      this.normalize();
-      this.$emit(_constants__WEBPACK_IMPORTED_MODULE_0__["EVENT_MOVE"], {
-        x: this.x,
-        y: this.y
-      });
-      if (!this.stop) setTimeout(this.move, _constants__WEBPACK_IMPORTED_MODULE_0__["ANSWER_MOVE_TICK"]);
+      if (!this.stop) {
+        this.x = this.x + this.dx * this.speed * Math.random();
+        this.y = this.y + this.dy * this.speed * Math.random();
+        this.normalize();
+        this.$emit(_constants__WEBPACK_IMPORTED_MODULE_0__["EVENT_MOVE"], {
+          x: this.x,
+          y: this.y
+        });
+      }
+
+      setTimeout(this.move, _constants__WEBPACK_IMPORTED_MODULE_0__["ANSWER_MOVE_TICK"]);
     },
     normalize: function normalize() {
       if (this.x > this.maxWidth - this.$el.getBoundingClientRect().width) {
@@ -4718,6 +4721,8 @@ __webpack_require__.r(__webpack_exports__);
       this.showText(this.missionText(this.currentMission + 1));
     },
     nextMission: function nextMission() {
+      var _this = this;
+
       if (this.winning === true) {
         return;
       }
@@ -4732,9 +4737,9 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      this.startNextMission(); // setTimeout(() => {
-      //     this.startNextMission()
-      // }, 1000);
+      setTimeout(function () {
+        _this.startNextMission();
+      }, 1000);
     },
     startNextMission: function startNextMission() {
       this.showText(this.missionText(this.currentMission + 1));

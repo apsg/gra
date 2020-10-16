@@ -87,18 +87,19 @@ export default {
         },
 
         move() {
-            this.x = (this.x + this.dx * this.speed * Math.random());
-            this.y = (this.y + this.dy * this.speed * Math.random());
+            if (!this.stop) {
+                this.x = (this.x + this.dx * this.speed * Math.random());
+                this.y = (this.y + this.dy * this.speed * Math.random());
 
-            this.normalize();
+                this.normalize();
 
-            this.$emit(EVENT_MOVE, {
-                x: this.x,
-                y: this.y,
-            });
+                this.$emit(EVENT_MOVE, {
+                    x: this.x,
+                    y: this.y,
+                });
+            }
 
-            if (!this.stop)
-                setTimeout(this.move, ANSWER_MOVE_TICK);
+            setTimeout(this.move, ANSWER_MOVE_TICK);
         },
 
         normalize() {
