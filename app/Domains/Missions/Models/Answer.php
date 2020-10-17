@@ -36,4 +36,11 @@ class Answer extends Model
     {
         return $this->belongsTo(Mission::class);
     }
+
+    public function toggleCorrect() : self
+    {
+        $this->is_correct = !$this->is_correct;
+
+        return $this;
+    }
 }

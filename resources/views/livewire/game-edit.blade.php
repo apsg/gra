@@ -1,6 +1,5 @@
 <div>
     <form wire:submit.prevent="save">
-
         <div class="form-group">
             <label class="font-weight-bold">Nazwa gry</label>
             <p>Nazwa gry pozwoli Ci ją w przyszłości łatwo odnaleźć, odróżnić i uruchomić.
@@ -24,8 +23,5 @@
             </a>
         @endforeach
 
-{{--        <button class="btn btn-primary">--}}
-{{--            <i class="fa fa-save"></i> Zapisz--}}
-{{--        </button>--}}
     </form>
 </div>
