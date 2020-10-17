@@ -52,4 +52,12 @@ class GamesController extends Controller
 
         return back()->with('status', 'Usunięto pomyślnie');
     }
+
+    public function remote(string $token)
+    {
+        $game = Game::where('token', $token)->firstOrFail();
+        $avatars = Avatar::global()->get();
+
+        return view('game')->with(compact('game', 'avatars'));
+    }
 }

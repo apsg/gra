@@ -50,4 +50,6 @@ Route::group(['prefix' => 'game', 'middleware' => 'auth'], function () {
     Route::get('/{game}', GamesController::class . '@preview')->name('game.play');
 });
 
+Route::get('gra/{token}', GamesController::class . '@remote')->name('remote');
+
 Route::get('about', SubscriptionController::class . '@about')->name('subscribe');

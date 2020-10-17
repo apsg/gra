@@ -6,6 +6,7 @@ use App\Domains\Missions\Models\Mission;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class GameSeeder extends Seeder
 {
@@ -15,6 +16,8 @@ class GameSeeder extends Seeder
             $game = Game::firstOrCreate([
                 'title'   => $gameData['title'],
                 'user_id' => null,
+            ], [
+                'token' => Str::random(),
             ]);
 
             foreach ($gameData['missions'] as $slug) {

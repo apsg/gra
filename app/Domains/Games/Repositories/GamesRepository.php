@@ -3,6 +3,7 @@ namespace App\Domains\Games\Repositories;
 
 use App\Domains\Games\Models\Game;
 use App\Models\User;
+use Illuminate\Support\Str;
 
 class GamesRepository
 {
@@ -11,6 +12,7 @@ class GamesRepository
         return Game::create([
             'user_id' => $user->id ?? null,
             'title'   => 'Twoja gra',
+            'token'   => Str::random(),
         ]);
     }
 }
