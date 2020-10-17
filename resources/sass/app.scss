@@ -24,11 +24,15 @@ html, body {
     color: $color-red;
 }
 
+.color-green {
+    color: $green;
+}
+
 .bg-red {
     background-color: lighten($color-red, 0.1);
 }
 
-.bg-blue{
+.bg-blue {
     background-color: $color-blue;
 }
 

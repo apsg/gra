@@ -12,6 +12,7 @@ class AvatarSeeder extends Seeder
             'images/avatars/mushroom.png',
             'images/avatars/mario.png',
             'images/avatars/cat.png',
+            'images/avatars/ufo.svg',
         ];
     }
 

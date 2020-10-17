@@ -3,6 +3,7 @@
 use App\Domains\Games\Controllers\GamesController;
 use App\Domains\Games\Models\Game;
 use App\Domains\Missions\Controllers\MissionsController;
+use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,3 +49,5 @@ Route::get('demo', MissionsController::class . '@demo');
 Route::group(['prefix' => 'game', 'middleware' => 'auth'], function () {
     Route::get('/{game}', GamesController::class . '@preview')->name('game.play');
 });
+
+Route::get('subscription', SubscriptionController::class . '@about')->name('subscribe');
