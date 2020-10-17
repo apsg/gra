@@ -44,7 +44,16 @@
         <img src="{{ asset('images/coin.gif') }}" height="140">
     </div>
 
-    <h3 class="color-red font-mono font-weight-bold mt-5">4. Ile monet to kosztuje?</h3>
+    <h3 class="color-red font-mono font-weight-bold mt-5">4. Dostosuj grę do gracza</h3>
+    <p class="color-white">Twoje gry możesz przygotować specjalnie dla konkretnego gracza. Ułóż zestaw misji
+        odpowiadający jego potrzebom oraz dostosuj dla niego poziom trudności. Możesz też wybrać z jakiego sterowania
+        może korzystać.
+    </p>
+    <p class="text-center">
+        <img src="{{asset('images/difficulty.png')}}">
+    </p>
+
+    <h3 class="color-red font-mono font-weight-bold mt-5">5. Ile monet to kosztuje?</h3>
     <p class="color-white">Predefiniowane misje i gry będą dostępne za darmo. Zawsze. Wystarczy się zarejestrować.
         W ramach darmowego konta możesz też utworzyć pewną ograniczoną liczbę własnych misji i gier.
     </p>

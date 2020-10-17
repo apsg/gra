@@ -44,10 +44,10 @@ Route::group(['prefix' => 'games', 'middleware' => 'auth'], function () {
     Route::delete('/{game}', GamesController::class . '@delete')->name('games.delete');
 });
 
-Route::get('demo', MissionsController::class . '@demo');
+Route::get('demo', GamesController::class . '@demo');
 
 Route::group(['prefix' => 'game', 'middleware' => 'auth'], function () {
     Route::get('/{game}', GamesController::class . '@preview')->name('game.play');
 });
 
-Route::get('subscription', SubscriptionController::class . '@about')->name('subscribe');
+Route::get('about', SubscriptionController::class . '@about')->name('subscribe');

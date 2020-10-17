@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Auth;
 
 class GamesController extends Controller
 {
+    public function demo()
+    {
+        $game = Game::global()->first();
+        $avatars = Avatar::global()->get();
+
+        return view('game')
+            ->with(compact('game', 'avatars'));
+    }
+
     public function preview(Game $game)
     {
         $avatars = Avatar::forUser(Auth::user())->get();
