@@ -97,6 +97,7 @@
     </table>
 
     <div class="d-flex justify-content-around mt-5">
+        <a class="btn btn-outline-primary" href="{{ route('demo') }}">Zobacz demo</a>
         <a class="btn btn-outline-primary" href="{{ route('register') }}">Załóż konto</a>
         <a class="btn btn-outline-primary" href="{{ route('subscribe') }}">Kup pełen dostęp</a>
     </div>

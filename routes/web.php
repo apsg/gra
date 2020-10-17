@@ -44,7 +44,7 @@ Route::group(['prefix' => 'games', 'middleware' => 'auth'], function () {
     Route::delete('/{game}', GamesController::class . '@delete')->name('games.delete');
 });
 
-Route::get('demo', GamesController::class . '@demo');
+Route::get('demo', GamesController::class . '@demo')->name('demo');
 
 Route::group(['prefix' => 'game', 'middleware' => 'auth'], function () {
     Route::get('/{game}', GamesController::class . '@preview')->name('game.play');
