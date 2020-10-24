@@ -6,6 +6,16 @@
             <div class="col-md-12">
                 <h3>Co nowego w aplikacji?</h3>
                 <div class="card">
+                    <div class="card-header">2020-10-24</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>7 nowych misji</li>
+                            <li>Możliwość dodania sugestii do gry</li>
+                            <li>Lekka zmiana kolorystyki</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
                     <div class="card-header">2020-10-10</div>
                     <div class="card-body">
                         <ul>
