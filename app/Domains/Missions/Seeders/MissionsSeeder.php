@@ -40,10 +40,10 @@ class MissionsSeeder extends Seeder
             [
                 'slug'    => 'm1',
                 'image'   => 'images/missions/m1.jpg',
-                'title'   => 'Generalizacja - nigdy się nie nauczę',
+                'title'   => 'Przepowiadanie przyszłości',
                 'answers' => [
                     [
-                        'text'       => "Nadmierna generalizacja",
+                        'text'       => "Przepowiadanie przyszłości",
                         'is_correct' => true,
                     ],
                     [
@@ -57,12 +57,31 @@ class MissionsSeeder extends Seeder
                 ],
             ],
             [
-                'slug'    => 'm2',
-                'image'   => 'images/missions/m1.jpg',
-                'title'   => 'Generalizacja - nigdy się nie nauczę 2',
+                'slug'    => 'm3',
+                'image'   => 'images/missions/czytanie_w_myslach.jpg',
+                'title'   => 'Czytanie w myślach',
                 'answers' => [
                     [
-                        'text'       => "Nadmierna generalizacja",
+                        'text'       => "Czytanie w myślach",
+                        'is_correct' => true,
+                    ],
+                    [
+                        'text'       => "Katastrofizacja",
+                        'is_correct' => false,
+                    ],
+                    [
+                        'text'       => "Pomijanie pozytywów",
+                        'is_correct' => false,
+                    ],
+                ],
+            ],
+            [
+                'slug'    => 'm4',
+                'image'   => 'images/missions/emocjonalne_uzasadnienia.jpg',
+                'title'   => 'Emocjonalne uzasadnienia',
+                'answers' => [
+                    [
+                        'text'       => "Emocjonalne uzasadnienia",
                         'is_correct' => true,
                     ],
                     [
@@ -71,6 +90,104 @@ class MissionsSeeder extends Seeder
                     ],
                     [
                         'text'       => "Pomijanie pozytywów",
+                        'is_correct' => false,
+                    ],
+                ],
+            ],
+            [
+                'slug'    => 'm5',
+                'image'   => 'images/missions/etykietowanie.jpg',
+                'title'   => 'Etykietowanie',
+                'answers' => [
+                    [
+                        'text'       => "Etykietowanie",
+                        'is_correct' => true,
+                    ],
+                    [
+                        'text'       => "Czytanie w myślach",
+                        'is_correct' => false,
+                    ],
+                    [
+                        'text'       => "Uzasadnienie emocjonalne",
+                        'is_correct' => false,
+                    ],
+                ],
+            ],
+            [
+                'slug'    => 'm6',
+                'image'   => 'images/missions/katastrofizacja.jpg',
+                'title'   => 'Katastrofizacja',
+                'answers' => [
+                    [
+                        'text'       => "Katastrofizacja",
+                        'is_correct' => true,
+                    ],
+                    [
+                        'text'       => "Personalizacja",
+                        'is_correct' => false,
+                    ],
+                    [
+                        'text'       => "Czytanie w myślach",
+                        'is_correct' => false,
+                    ],
+                ],
+            ],
+
+            [
+                'slug'    => 'm7',
+                'image'   => 'images/missions/personalizacja.jpg',
+                'title'   => 'Personalizacja',
+                'answers' => [
+                    [
+                        'text'       => "Personalizacja",
+                        'is_correct' => true,
+                    ],
+                    [
+                        'text'       => "Etykietowanie",
+                        'is_correct' => false,
+                    ],
+                    [
+                        'text'       => "Przeskakiwanie do konkluzji",
+                        'is_correct' => false,
+                    ],
+                ],
+            ],
+
+            [
+                'slug'    => 'm8',
+                'image'   => 'images/missions/pomijanie_pozytywow.jpg',
+                'title'   => 'Pomijanie pozytywów',
+                'answers' => [
+                    [
+                        'text'       => "Pomijanie pozytywów",
+                        'is_correct' => true,
+                    ],
+                    [
+                        'text'       => "Czytanie w myślach",
+                        'is_correct' => false,
+                    ],
+                    [
+                        'text'       => "Emocjonalne uzasadnianie",
+                        'is_correct' => false,
+                    ],
+                ],
+            ],
+
+            [
+                'slug'    => 'm9',
+                'image'   => 'images/missions/przepowiadanie_przyszlosci.jpg',
+                'title'   => 'Przepowiadanie przyszłości',
+                'answers' => [
+                    [
+                        'text'       => "Przepowiadanie przyszłości",
+                        'is_correct' => true,
+                    ],
+                    [
+                        'text'       => "Personalizacja",
+                        'is_correct' => false,
+                    ],
+                    [
+                        'text'       => "Myślenie czarno-białe",
                         'is_correct' => false,
                     ],
                 ],
