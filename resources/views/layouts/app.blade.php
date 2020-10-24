@@ -85,5 +85,7 @@
 
             @yield('content')
         </main>
+
+        <suggester></suggester>
     </div>
 @endsection

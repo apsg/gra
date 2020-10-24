@@ -20,13 +20,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+    @stack('styles')
     @stack('head')
 </head>
 <body @yield('body')>
 
 @yield('app')
 
+@stack('scripts')
 @stack('body-end')
 </body>
 </html>

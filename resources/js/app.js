@@ -16,6 +16,7 @@ Vue.use(Vuex);
 Vue.component('mission', require('./components/Mission.vue').default);
 Vue.component('game', require('./components/Game.vue').default);
 Vue.component('answer-inputer', require('./components/admin/AnswersInputer.vue').default);
+Vue.component('suggester', require('./components/admin/Suggester').default);
 
 const store = new Vuex.Store({
     state: {

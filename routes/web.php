@@ -4,6 +4,7 @@ use App\Domains\Games\Controllers\GamesController;
 use App\Domains\Games\Models\Game;
 use App\Domains\Missions\Controllers\MissionsController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\SuggestionsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,3 +54,4 @@ Route::group(['prefix' => 'game', 'middleware' => 'auth'], function () {
 Route::get('gra/{token}', GamesController::class . '@remote')->name('remote');
 
 Route::get('about', SubscriptionController::class . '@about')->name('subscribe');
+Route::post('suggestions', SuggestionsController::class . '@store')->name('suggestion');
