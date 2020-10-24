@@ -18,7 +18,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <textarea class="form-control" v-model="text"></textarea>
+                        <textarea rows="10" class="form-control" v-model="text"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>

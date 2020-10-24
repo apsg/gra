@@ -42878,6 +42878,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
+                  attrs: { rows: "10" },
                   domProps: { value: _vm.text },
                   on: {
                     input: function($event) {
