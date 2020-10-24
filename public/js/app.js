@@ -42140,7 +42140,7 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "answer text-center font-mono bg-blue color-red p-3",
+      staticClass: "answer text-center font-mono bg-blue color-lblue p-3",
       style: _vm.answerStyle
     },
     [_vm._v("\n    " + _vm._s(_vm.text) + "\n")]

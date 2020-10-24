@@ -28,6 +28,10 @@ html, body {
     color: $green;
 }
 
+.color-lblue {
+    color: $cyan;
+}
+
 .bg-red {
     background-color: lighten($color-red, 0.1);
 }

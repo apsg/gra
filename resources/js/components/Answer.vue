@@ -1,6 +1,6 @@
 <template>
     <div
-        class="answer text-center font-mono bg-blue color-red p-3"
+        class="answer text-center font-mono bg-blue color-lblue p-3"
         :style="answerStyle">
         {{ text }}
     </div>
