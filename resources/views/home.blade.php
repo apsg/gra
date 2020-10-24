@@ -5,19 +5,16 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
+                <h3>Co nowego w aplikacji?</h3>
                 <div class="card">
-                    <div class="card-header">Etap 1</div>
-
+                    <div class="card-header">2020-10-10</div>
                     <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
+                        <ul>
+                            <li>Możliwość generowania linku dostępu zdalnego</li>
+                        </ul>
                     </div>
                 </div>
             </div>
