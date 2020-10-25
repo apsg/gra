@@ -1,9 +1,23 @@
 @extends('layouts.welcome')
 
-@section('title', 'O grze')
+@section('title', 'Misja:Sprzymierzeniec | Gra psychologiczna')
 
 @section('content')
     <h2 class="text-center color-red font-mono font-weight-bold mb-5 mt-5">Misja:Sprzymierzeniec</h2>
+
+    <div class="d-flex justify-content-around mb-5">
+        <a href="{{ route('register') }}" class="btn btn-secondary">Zarejestruj się</a>
+        <a href="{{ route('login') }}" class="btn btn-secondary">Zaloguj się</a>
+        <a href="{{ route('demo') }}" class="btn btn-secondary">Zobacz demo</a>
+    </div>
+
+    <p class="color-white">
+        Misja:sprzymierzeniec to gra wspomagająca rozumienie zniekształceń poznawczych.
+        To zbiór misji-poziomów...
+        <br/>
+        Forma gry oraz możliwość sterowania za pomocą myszki, klawiatury lub gamepada sprawiają, że
+        jest ona atrakcyjna i angażująca dla młodych ludzi.
+    </p>
 
     <h3 class="color-red font-mono font-weight-bold">1. Dodawaj misje</h3>
     <p class="color-white">Możesz łatwo dodawać własne misje do gry! Załaduj zdjęcie, wpisz odpowiedzi i zaznacz, która
@@ -53,48 +67,50 @@
         <img src="{{asset('images/difficulty.png')}}">
     </p>
 
-    <h3 class="color-red font-mono font-weight-bold mt-5">5. Ile monet to kosztuje?</h3>
-    <p class="color-white">Predefiniowane misje i gry będą dostępne za darmo. Zawsze. Wystarczy się zarejestrować.
-        W ramach darmowego konta możesz też utworzyć pewną ograniczoną liczbę własnych misji i gier.
-    </p>
+    @if(app()->environment('local'))
+        <h3 class="color-red font-mono font-weight-bold mt-5">5. Ile monet to kosztuje?</h3>
+        <p class="color-white">Predefiniowane misje i gry będą dostępne za darmo. Zawsze. Wystarczy się zarejestrować.
+            W ramach darmowego konta możesz też utworzyć pewną ograniczoną liczbę własnych misji i gier.
+        </p>
 
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <td></td>
-            <td class="text-center">
-                <img src="{{ asset('images/avatars/mushroom.png') }}" height="80">
-                <h3 class="text-center color-red font-mono font-weight-bold mt-3">Konto darmowe</h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <td></td>
+                <td class="text-center">
+                    <img src="{{ asset('images/avatars/mushroom.png') }}" height="80">
+                    <h3 class="text-center color-red font-mono font-weight-bold mt-3">Konto darmowe</h3>
 
-            </td>
-            <td class="text-center">
-                <img src="{{ asset('images/avatars/mario.png') }}" height="80">
-                <h3 class="text-center color-red font-mono font-weight-bold mt-3">Konto płatne</h3>
-            </td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="color-white font-mono text-center">
-            <td class="font-weight-bold">Własne poziomy:</td>
-            <td>3</td>
-            <td>Dowolnie</td>
-        </tr>
-        <tr class="color-white font-mono text-center">
-            <td class="font-weight-bold">Własne gry:</td>
-            <td>1</td>
-            <td>Dowolnie</td>
-        </tr>
-        <tr class="color-white font-mono text-center">
-            <td class="font-weight-bold">Własne awatary:</td>
-            <td>
-                <i class="fa fa-times color-red"></i> nie
-            </td>
-            <td>
-                <i class="fa fa-check color-green"></i> tak
-            </td>
-        </tr>
-        </tbody>
-    </table>
+                </td>
+                <td class="text-center">
+                    <img src="{{ asset('images/avatars/mario.png') }}" height="80">
+                    <h3 class="text-center color-red font-mono font-weight-bold mt-3">Konto płatne</h3>
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="color-white font-mono text-center">
+                <td class="font-weight-bold">Własne poziomy:</td>
+                <td>3</td>
+                <td>Dowolnie</td>
+            </tr>
+            <tr class="color-white font-mono text-center">
+                <td class="font-weight-bold">Własne gry:</td>
+                <td>1</td>
+                <td>Dowolnie</td>
+            </tr>
+            <tr class="color-white font-mono text-center">
+                <td class="font-weight-bold">Własne awatary:</td>
+                <td>
+                    <i class="fa fa-times color-red"></i> nie
+                </td>
+                <td>
+                    <i class="fa fa-check color-green"></i> tak
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    @endif
 
     <div class="d-flex justify-content-around mt-5">
         <a class="btn btn-outline-primary" href="{{ route('demo') }}">Zobacz demo</a>
@@ -102,9 +118,16 @@
         <a class="btn btn-outline-primary" href="{{ route('subscribe') }}">Kup pełen dostęp</a>
     </div>
 
+    <hr/>
+    <h3>Źródła grafik</h3>
+    <div class="color-white mb-5">
+        <p>Darmowe ikony pobrano z serwisu <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
+        <p>
+            Icons made by <a href="https://www.flaticon.com/free-icon/mouse_702640" title="Good Ware">Good Ware</a> from
+            <a
+                href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+        </p>
 
-    <div class="text-white small mt-5">
-        Icons made by <a href="https://www.flaticon.com/free-icon/mouse_702640" title="Good Ware">Good Ware</a> from <a
-            href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+        <p>Darmowe obrazy i zdjęcia pobrano z serwisu <a href="https://unsplash.com" target="_blank">Unsplash</a></p>
     </div>
 @endsection

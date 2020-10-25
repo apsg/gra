@@ -3,6 +3,7 @@
 use App\Domains\Games\Controllers\GamesController;
 use App\Domains\Games\Models\Game;
 use App\Domains\Missions\Controllers\MissionsController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\SuggestionsController;
 use Illuminate\Support\Facades\Route;
@@ -18,13 +19,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', SubscriptionController::class . '@about');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::group(['prefix' => 'missions', 'middleware' => 'auth'], function () {
     Route::get('/', MissionsController::class . '@index')->name('mission.index');
