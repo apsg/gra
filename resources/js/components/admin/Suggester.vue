@@ -3,16 +3,16 @@
 
         <div ref="modal"
              class="modal fade"
-             id="staticBackdrop"
+             id="suggestionsModal"
              data-backdrop="static"
              tabindex="-1"
              role="dialog"
-             aria-labelledby="staticBackdropLabel"
+             aria-labelledby="suggestionsModalLabel"
              aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Wyślij nam swoje sugestie</h5>
+                        <h5 class="modal-title" id="suggestionsModalLabel">Wyślij nam swoje sugestie</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -31,7 +31,7 @@
         <button
             type="button"
             data-toggle="modal"
-            data-target="#staticBackdrop"
+            data-target="#suggestionsModal"
             class="rounded-circle bg-blue text-center">
             <i class="fa fa-lightbulb-o fa-2x color-red"></i>
         </button>
@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import $ from 'jquery';
+
 export default {
     name: "Suggester",
 
@@ -55,7 +57,7 @@ export default {
                 text: this.text
             }).then(() => {
                 this.text = '';
-                this.$refs.modal.modal('hide');
+                $('#suggestionsModal').modal('hide');
             });
         }
     }

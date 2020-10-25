@@ -5405,6 +5405,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -5445,6 +5447,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Suggester",
   data: function data() {
@@ -5461,8 +5464,7 @@ __webpack_require__.r(__webpack_exports__);
         text: this.text
       }).then(function () {
         _this.text = '';
-
-        _this.$refs.modal.modal('hide');
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()('#suggestionsModal').modal('hide');
       });
     }
   }
@@ -42849,11 +42851,11 @@ var render = function() {
         ref: "modal",
         staticClass: "modal fade",
         attrs: {
-          id: "staticBackdrop",
+          id: "suggestionsModal",
           "data-backdrop": "static",
           tabindex: "-1",
           role: "dialog",
-          "aria-labelledby": "staticBackdropLabel",
+          "aria-labelledby": "suggestionsModalLabel",
           "aria-hidden": "true"
         }
       },
@@ -42929,7 +42931,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "modal-header" }, [
       _c(
         "h5",
-        { staticClass: "modal-title", attrs: { id: "staticBackdropLabel" } },
+        { staticClass: "modal-title", attrs: { id: "suggestionsModalLabel" } },
         [_vm._v("Wyślij nam swoje sugestie")]
       ),
       _vm._v(" "),
@@ -42958,7 +42960,7 @@ var staticRenderFns = [
         attrs: {
           type: "button",
           "data-toggle": "modal",
-          "data-target": "#staticBackdrop"
+          "data-target": "#suggestionsModal"
         }
       },
       [_c("i", { staticClass: "fa fa-lightbulb-o fa-2x color-red" })]
