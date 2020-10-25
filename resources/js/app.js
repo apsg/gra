@@ -35,6 +35,12 @@ const store = new Vuex.Store({
 
         nextMission(state) {
             state.currentMission++;
+        },
+
+        reset(state)
+        {
+            state.currentMission = 0;
+            state.stop = false;
         }
     }
 });

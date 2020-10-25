@@ -4708,6 +4708,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
+    this.$store.commit('reset');
     this.startGame();
   },
   methods: {
@@ -56435,6 +56436,10 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
     },
     nextMission: function nextMission(state) {
       state.currentMission++;
+    },
+    reset: function reset(state) {
+      state.currentMission = 0;
+      state.stop = false;
     }
   }
 });

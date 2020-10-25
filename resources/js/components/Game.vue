@@ -61,6 +61,7 @@ export default {
     },
 
     mounted() {
+        this.$store.commit('reset');
         this.startGame();
     },
 
