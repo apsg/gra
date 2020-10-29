@@ -93,7 +93,7 @@ export default {
         },
 
         startNextMission() {
-            this.showText(this.missionText(this.$store.state.currentMission + 1));
+            this.showText(this.missionText(this.$store.state.currentMission + 2));
             this.$store.commit('nextMission');
             this.$refs.mission.restart();
         },

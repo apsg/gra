@@ -143,5 +143,6 @@ export default {
 .answer {
     position: absolute;
     font-size: 20px;
+    transition: 0.2s;
 }
 </style>

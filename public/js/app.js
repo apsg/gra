@@ -4738,7 +4738,7 @@ __webpack_require__.r(__webpack_exports__);
       }, 1000);
     },
     startNextMission: function startNextMission() {
-      this.showText(this.missionText(this.$store.state.currentMission + 1));
+      this.showText(this.missionText(this.$store.state.currentMission + 2));
       this.$store.commit('nextMission');
       this.$refs.mission.restart();
     },
@@ -10018,7 +10018,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.answer[data-v-98a0422e] {\n    position: absolute;\n    font-size: 20px;\n}\n", ""]);
+exports.push([module.i, "\n.answer[data-v-98a0422e] {\n    position: absolute;\n    font-size: 20px;\n    transition: 0.2s;\n}\n", ""]);
 
 // exports
 
