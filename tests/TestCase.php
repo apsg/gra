@@ -9,8 +9,15 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
+    protected function setUp() : void
+    {
+        parent::setUp();
+
+        $this->artisan('migrate');
+    }
+
     public function createUser(array $attributes = []) : User
     {
-        return User::factory($attributes)->create();
+        return User::factory()->create($attributes);
     }
 }

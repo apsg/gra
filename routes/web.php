@@ -3,6 +3,7 @@
 use App\Domains\Games\Controllers\GamesController;
 use App\Domains\Games\Models\Game;
 use App\Domains\Missions\Controllers\MissionsController;
+use App\Domains\Missions\Models\Mission;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\SuggestionsController;
@@ -26,7 +27,9 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::group(['prefix' => 'missions', 'middleware' => 'auth'], function () {
     Route::get('/', MissionsController::class . '@index')->name('mission.index');
-    Route::post('/', MissionsController::class . '@store')->name('mission.store');
+    Route::post('/', MissionsController::class . '@store')
+        ->name('mission.store')
+        ->middleware('can:create,' . Mission::class);
     Route::get('/create', MissionsController::class . '@create')->name('mission.create');
     Route::get('/{mission}', MissionsController::class . '@show')->name('mission.edit');
     Route::delete('/{mission}', MissionsController::class . '@delete')->name('mission.delete');

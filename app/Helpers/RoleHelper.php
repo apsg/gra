@@ -8,5 +8,5 @@ class RoleHelper
     const USER = 'user';
 
     const FREE_GAMES = 1;
-    const FREE_MISSIONS = 2;
+    const FREE_MISSIONS = 3;
 }
