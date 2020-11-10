@@ -7,9 +7,9 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        Gry
-                        <a href="{{ route('games.create') }}" class="btn btn-primary pull-right">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div>Gry</div>
+                        <a href="{{ route('games.create') }}" class="btn btn-primary">
                             <i class="fa fa-plus"></i> Dodaj nową grę
                         </a>
                     </div>
