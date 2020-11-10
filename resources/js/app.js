@@ -10,8 +10,10 @@ require('@fortawesome/fontawesome-free');
 
 window.Vue = require('vue');
 import Vuex from 'vuex';
+import Clipboard from 'v-clipboard';
 
 Vue.use(Vuex);
+Vue.use(Clipboard);
 
 Vue.component('mission', require('./components/Mission.vue').default);
 Vue.component('game', require('./components/Game.vue').default);

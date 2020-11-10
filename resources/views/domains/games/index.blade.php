@@ -22,12 +22,16 @@
 
                         <div class="alert alert-info">
                             <h3>Gry globalne dostępne dla ciebie:</h3>
-                            @foreach($gamesGlobal as $game)
-                                <a href="{{ route('game.play', $game) }}" target="_blank">
-                                    {{ $game->title }} (Misji: {{ $game->missions()->count() }})
-                                </a>
-                                <br/>
-                            @endforeach
+                            <ul>
+                                @foreach($gamesGlobal as $game)
+                                    <li>
+                                        <a href="{{ route('game.play', $game) }}" target="_blank">
+                                            {{ $game->title }} (Misji: {{ $game->missions()->count() }})
+                                        </a>
+                                        <livewire:remote-token :game="$game" :user="Auth::user()"/>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                         <div class="alert">
                             <h3>Twoje gry:</h3>
@@ -64,6 +68,7 @@
                                             >
                                                 <i class="fa fa-play"></i> Zagraj
                                             </a>
+                                            <livewire:remote-token :game="$game" :user="Auth::user()"/>
                                         </td>
                                     </tr>
                                 @endforeach

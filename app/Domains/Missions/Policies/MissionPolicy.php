@@ -38,6 +38,10 @@ class MissionPolicy
 
     public function create(User $user)
     {
+        if ($user->hasRole(RoleHelper::SUBSCRIBED)) {
+            return true;
+        }
+
         if ($user->missions()->count() < RoleHelper::FREE_MISSIONS) {
             return true;
         }

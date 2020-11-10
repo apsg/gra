@@ -1,12 +1,10 @@
 <?php
-
 namespace App\Http\Livewire;
 
 use App\Domains\Games\Models\Game;
 use App\Domains\Games\Models\RemoteToken as RemoteTokenModel;
 use App\Domains\Games\Repositories\RemoteTokenRepository;
 use App\Models\User;
-use Carbon\Carbon;
 use Livewire\Component;
 
 class RemoteToken extends Component
@@ -37,6 +35,6 @@ class RemoteToken extends Component
     public function generate()
     {
         $this->token = app(RemoteTokenRepository::class)
-            ->create($this->user, $this->game, Carbon::now()->addHours(5));
+            ->create($this->user, $this->game, 2);
     }
 }

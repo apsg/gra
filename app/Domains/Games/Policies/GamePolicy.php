@@ -32,7 +32,11 @@ class GamePolicy
 
     public function create(User $user)
     {
-        if ($user->missions()->count() < RoleHelper::FREE_GAMES) {
+        if ($user->hasRole(RoleHelper::SUBSCRIBED)) {
+            return true;
+        }
+
+        if ($user->games()->count() < RoleHelper::FREE_GAMES) {
             return true;
         }
 

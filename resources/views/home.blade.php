@@ -6,6 +6,14 @@
             <div class="col-md-12">
                 <h3>Co nowego w aplikacji?</h3>
                 <div class="card">
+                    <div class="card-header">2020-11-10</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Możliwość generowania tokenów do zdalnego dostepu do gry (ważne 2 godziny od uruchomienia gry)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
                     <div class="card-header">2020-10-24</div>
                     <div class="card-body">
                         <ul>
