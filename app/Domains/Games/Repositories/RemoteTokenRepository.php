@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class RemoteTokenRepository
 {
-    public function create(User $user, Game $game, Carbon $expiresAt = null) : RemoteToken
+    public function create(User $user, Game $game, int $expirationHours = null) : RemoteToken
     {
         $token = RemoteToken::firstOrCreate([
             'user_id' => $user->id,
@@ -19,8 +19,9 @@ class RemoteTokenRepository
         ]);
 
         $token->update([
-            'token'      => Str::random(),
-            'expires_at' => $expiresAt,
+            'token'           => Str::random(),
+            'expires_at'      => null,
+            'valid_for_hours' => $expirationHours,
         ]);
 
         return $token;

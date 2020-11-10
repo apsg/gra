@@ -7,16 +7,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int       id
- * @property string    token
- * @property int       user_id
- * @property int       game_id
- * @property Carbon    expires_at
- * @property Carbon    created_at
- * @property Carbon    updated_at
+ * @property int         id
+ * @property string      token
+ * @property int         user_id
+ * @property int         game_id
+ * @property Carbon|null expires_at
+ * @property int|null    valid_for_hours
+ * @property Carbon      created_at
+ * @property Carbon      updated_at
  *
- * @property-read User user
- * @property-read Game game
+ * @property-read User   user
+ * @property-read Game   game
  */
 class RemoteToken extends Model
 {
@@ -27,6 +28,7 @@ class RemoteToken extends Model
         'user_id',
         'game_id',
         'expires_at',
+        'valid_for_hours',
     ];
 
     protected $casts = [
@@ -50,6 +52,23 @@ class RemoteToken extends Model
         }
 
         return $this->expires_at->isFuture();
+    }
+
+    public function use() : self
+    {
+        if ($this->valid_for_hours === null) {
+            return $this;
+        }
+
+        if ($this->expires_at !== null) {
+            return $this;
+        }
+
+        $this->update([
+            'expires_at' => Carbon::now()->addHours($this->valid_for_hours),
+        ]);
+
+        return $this;
     }
 
     public function link()

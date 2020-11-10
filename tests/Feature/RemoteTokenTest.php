@@ -11,14 +11,10 @@ use Tests\TestCase;
 
 class RemoteTokenTest extends TestCase
 {
-    /**
-     * @var RemoteTokenRepository
-     */
+    /** @var RemoteTokenRepository */
     private $tokenRepository;
 
-    /**
-     * @var Game
-     */
+    /** @var Game */
     private $game;
 
     protected function setUp() : void
@@ -82,7 +78,7 @@ class RemoteTokenTest extends TestCase
     {
         // given
         $token = $this->tokenRepository
-            ->create($this->game->user, $this->game, Carbon::now()->addHour());
+            ->create($this->game->user, $this->game, 2);
 
         // when
         $response = $this->get(route('remote', ['token' => $token->token]));
@@ -99,11 +95,34 @@ class RemoteTokenTest extends TestCase
     }
 
     /** @test */
+    public function token_expiration_time_starts_after_first_use()
+    {
+        // given
+        $token = $this->tokenRepository
+            ->create($this->game->user, $this->game, 2);
+
+        // when
+        Carbon::setTestNow(Carbon::now()->addHours(5));
+
+        // then
+        $this->assertTrue($token->isValid());
+        $this->assertNull($token->expires_at);
+
+        // when
+        $response = $this->get(route('remote', ['token' => $token->token]));
+
+        // then
+        $response->assertOk();
+        $this->assertNotNull($token->fresh()->expires_at);
+
+    }
+
+    /** @test */
     public function token_is_removed_if_game_gets_deleted()
     {
         // given
         $token = $this->tokenRepository
-            ->create($this->game->user, $this->game, Carbon::now()->addHour());
+            ->create($this->game->user, $this->game, 2);
 
         // when
         $this->game->delete();

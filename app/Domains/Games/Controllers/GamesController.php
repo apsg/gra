@@ -57,7 +57,7 @@ class GamesController extends Controller
     public function remote(string $token)
     {
         $validator = new RemoteTokenValidator($token);
-        $validator->validate();
+        $validator->validateAndUse();
 
         $avatars = Avatar::global()->get();
 
