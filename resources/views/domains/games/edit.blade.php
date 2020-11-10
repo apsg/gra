@@ -24,7 +24,7 @@
                                 <a href="{{ route('games.index') }}" class="btn btn-outline-secondary">
                                     <i class="fa fa-backward"></i> Wróć
                                 </a>
-
+                                <livewire:remote-token :game="$game" :user="Auth::user()"></livewire:remote-token>
                             </div>
                         </h3>
                     </div>

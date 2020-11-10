@@ -25,7 +25,7 @@ Route::group(['prefix' => 'missions', 'middleware' => 'auth'], function () {
     Route::get('/{mission}/preview', MissionsController::class . '@preview')->name('mission.preview');
 });
 
-Route::group(['prefix' => 'games', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'Games', 'middleware' => 'auth'], function () {
     Route::get('/', GamesController::class . '@index')->name('games.index');
     Route::post('/', GamesController::class . '@store')->name('games.store');
     Route::get('/create', GamesController::class . '@create')

@@ -1,6 +1,5 @@
 <?php
-
-namespace Database\Factories;
+namespace Database\Factories\Domains\Missions\Models;
 
 use App\Domains\Missions\Models\Mission;
 use App\Models\User;

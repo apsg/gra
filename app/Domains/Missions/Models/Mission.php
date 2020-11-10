@@ -7,6 +7,7 @@ use App\Models\Traits\HasImage;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -26,7 +27,7 @@ use Illuminate\Support\Str;
  */
 class Mission extends Model
 {
-    use MissionScopes, HasImage;
+    use MissionScopes, HasImage, HasFactory;
 
     protected $fillable = [
         'image',

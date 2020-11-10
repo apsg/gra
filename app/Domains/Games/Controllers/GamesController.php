@@ -3,6 +3,7 @@ namespace App\Domains\Games\Controllers;
 
 use App\Domains\Games\Models\Avatar;
 use App\Domains\Games\Models\Game;
+use App\Domains\Games\RemoteTokenValidator;
 use App\Domains\Games\Repositories\GamesRepository;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -55,9 +56,14 @@ class GamesController extends Controller
 
     public function remote(string $token)
     {
-        $game = Game::where('token', $token)->firstOrFail();
+        $validator = new RemoteTokenValidator($token);
+        $validator->validate();
+
         $avatars = Avatar::global()->get();
 
-        return view('game')->with(compact('game', 'avatars'));
+        return view('game')->with([
+            'game'    => $validator->game(),
+            'avatars' => $avatars,
+        ]);
     }
 }

@@ -33,6 +33,16 @@ class RemoteToken extends Model
         'expires_at' => 'datetime',
     ];
 
+    public function game()
+    {
+        return $this->belongsTo(Game::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function isValid()
     {
         if ($this->expires_at === null) {
@@ -40,5 +50,12 @@ class RemoteToken extends Model
         }
 
         return $this->expires_at->isFuture();
+    }
+
+    public function link()
+    {
+        return route('remote', [
+            'token' => $this->token,
+        ]);
     }
 }

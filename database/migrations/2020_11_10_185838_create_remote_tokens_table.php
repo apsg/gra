@@ -30,6 +30,10 @@ class CreateRemoteTokensTable extends Migration
                 ->on('games')
                 ->cascadeOnDelete();
 
+            $table->tinyInteger('valid_for')
+                ->nullable()
+                ->default(2);
+
             $table->timestamp('expires_at')->nullable();
 
             $table->timestamps();
