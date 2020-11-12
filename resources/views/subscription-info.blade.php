@@ -119,7 +119,7 @@
     </div>
 
     <hr/>
-    <h3>Źródła grafik</h3>
+    <h3>Źródła zasobów</h3>
     <div class="color-white mb-5">
         <p>Darmowe ikony pobrano z serwisu <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
         <p>
@@ -129,5 +129,12 @@
         </p>
 
         <p>Darmowe obrazy i zdjęcia pobrano z serwisu <a href="https://unsplash.com" target="_blank">Unsplash</a></p>
+
+        <p>
+            Dźwięki autorstwa
+            <a href="https://freesound.org/people/LittleRobotSoundFactory/" target="_blank">LittleRobotSoundFactory</a>
+            udostępnione na licencji
+            <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC-BY-3.0</a>.
+        </p>
     </div>
 @endsection

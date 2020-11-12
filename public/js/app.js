@@ -4437,7 +4437,8 @@ __webpack_require__.r(__webpack_exports__);
       x: 0,
       y: 0,
       dx: 1,
-      dy: 1
+      dy: 1,
+      clicked: false
     };
   },
   mounted: function mounted() {
@@ -4455,6 +4456,7 @@ __webpack_require__.r(__webpack_exports__);
       this.y = Math.random() * this.maxHeight;
       this.dx = Math.random() > 0.5 ? -1 : 1;
       this.dy = Math.random() > 0.5 ? -1 : 1;
+      this.clicked = false;
     },
     checkCollide: function checkCollide(object) {
       if (object.right < this.$el.getBoundingClientRect().left) return false;
@@ -4651,6 +4653,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TextBox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TextBox */ "./resources/js/components/TextBox.vue");
 /* harmony import */ var _AvatarSelector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AvatarSelector */ "./resources/js/components/AvatarSelector.vue");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../helpers */ "./resources/js/helpers.js");
 //
 //
 //
@@ -4676,6 +4679,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 
+
+var sounds = new _helpers__WEBPACK_IMPORTED_MODULE_2__["Sounds"]();
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Game",
   components: {
@@ -4704,12 +4709,14 @@ __webpack_require__.r(__webpack_exports__);
       text: "",
       correct: 0,
       incorrect: 0,
-      selectedAvatar: '/images/avatars/mushroom.png'
+      selectedAvatar: '/images/avatars/mushroom.png',
+      sounds: {}
     };
   },
   mounted: function mounted() {
     this.$store.commit('reset');
     this.startGame();
+    this.sounds.win = new Audio('/sounds/victory.wav');
   },
   methods: {
     startGame: function startGame() {
@@ -4729,6 +4736,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.$store.state.currentMission === this.missions.length - 1) {
         this.winning = true;
+        this.sounds.win.play();
         this.showText(this.winText(this.points), true);
         return;
       }
@@ -5047,7 +5055,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         gamepad: true,
         keyboard: true
       },
-      speed: 3
+      speed: 3,
+      sounds: {}
     };
   },
   mounted: function mounted() {
@@ -5059,6 +5068,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }, 500);
     this.scale = Math.ceil(this.width / 100);
     this.restart();
+    this.sounds.bad = new Audio('/sounds/bad.wav');
+    this.sounds.point = new Audio('/sounds/point.wav');
   },
   methods: {
     restart: function restart() {
@@ -5115,9 +5126,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           if (answer.correct) {
             console.log('trafiony');
             this.success();
-          } else {
-            this.$emit('incorrect', 1);
+            return;
           }
+
+          this.sounds.bad.play();
+          if (answer.clicked === true) return;
+          answer.clicked = true;
+          this.$emit('incorrect', 1);
         }
       } catch (err) {
         _iterator2.e(err);
@@ -5127,6 +5142,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     success: function success() {
       this.$store.commit('stop');
+      this.sounds.point.play();
       this.$emit('success', 1);
     },
     checkAnswersCollisions: function checkAnswersCollisions(id) {
@@ -5216,8 +5232,8 @@ __webpack_require__.r(__webpack_exports__);
   props: ['speed'],
   methods: {
     getClass: function getClass(id) {
-      if (id <= this.speed) return 'fa-star';
-      return 'fa-star-o';
+      if (id <= this.speed) return 'fas fa-star';
+      return 'far fa-star';
     }
   }
 });
@@ -42581,15 +42597,15 @@ var render = function() {
     "div",
     { staticClass: "d-inline-block speed-indicator color-red" },
     [
-      _c("i", { staticClass: "fa", class: _vm.getClass(1) }),
+      _c("i", { class: _vm.getClass(1) }),
       _vm._v(" "),
-      _c("i", { staticClass: "fa", class: _vm.getClass(2) }),
+      _c("i", { class: _vm.getClass(2) }),
       _vm._v(" "),
-      _c("i", { staticClass: "fa", class: _vm.getClass(3) }),
+      _c("i", { class: _vm.getClass(3) }),
       _vm._v(" "),
-      _c("i", { staticClass: "fa", class: _vm.getClass(4) }),
+      _c("i", { class: _vm.getClass(4) }),
       _vm._v(" "),
-      _c("i", { staticClass: "fa", class: _vm.getClass(5) })
+      _c("i", { class: _vm.getClass(5) })
     ]
   )
 }
@@ -57632,14 +57648,21 @@ var KEYBOARD = {
 /*!*********************************!*\
   !*** ./resources/js/helpers.js ***!
   \*********************************/
-/*! exports provided: collision, center */
+/*! exports provided: collision, center, Sounds */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "collision", function() { return collision; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "center", function() { return center; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Sounds", function() { return Sounds; });
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants */ "./resources/js/constants.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 function collision(rect1, rect2) {
   if (rect1.right < rect2.left) return false;
@@ -57686,6 +57709,34 @@ function center(rect) {
     y: rect.bottom + (rect.top - rect.bottom) / 2
   };
 }
+var Sounds = /*#__PURE__*/function () {
+  function Sounds() {
+    _classCallCheck(this, Sounds);
+
+    this.win = new Audio('/sounds/victory.wav');
+    this.bad = new Audio('/sounds/bad.wav');
+    this.point = new Audio('/sounds/point.wav');
+  }
+
+  _createClass(Sounds, [{
+    key: "win",
+    value: function win() {
+      this.win.play();
+    }
+  }, {
+    key: "point",
+    value: function point() {
+      this.point.play();
+    }
+  }, {
+    key: "bad",
+    value: function bad() {
+      this.bad.play();
+    }
+  }]);
+
+  return Sounds;
+}();
 
 /***/ }),
 

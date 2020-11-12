@@ -41,6 +41,7 @@ export default {
             y: 0,
             dx: 1,
             dy: 1,
+            clicked: false
         }
     },
 
@@ -64,6 +65,7 @@ export default {
             this.y = Math.random() * this.maxHeight;
             this.dx = Math.random() > 0.5 ? -1 : 1;
             this.dy = Math.random() > 0.5 ? -1 : 1;
+            this.clicked = false;
         },
 
         checkCollide(object) {

@@ -85,7 +85,7 @@ import Avatar from "./Avatar";
 import Answer from "./Answer";
 import SpeedSelector from "./SpeedSelector";
 import {BUTTON_FIRE} from "../constants";
-import {collision} from "../helpers";
+import {collision, Sounds} from "../helpers";
 
 export default {
     name: 'Mission',
@@ -133,6 +133,7 @@ export default {
                 keyboard: true,
             },
             speed: 3,
+            sounds: {},
         }
     },
 
@@ -144,6 +145,9 @@ export default {
         this.scale = Math.ceil(this.width / 100);
 
         this.restart();
+
+        this.sounds.bad = new Audio('/sounds/bad.wav');
+        this.sounds.point = new Audio('/sounds/point.wav');
     },
 
     methods: {
@@ -202,14 +206,23 @@ export default {
                 if (answer.correct) {
                     console.log('trafiony');
                     this.success();
-                } else {
-                    this.$emit('incorrect', 1);
+
+                    return;
                 }
+
+                this.sounds.bad.play();
+
+                if (answer.clicked === true)
+                    return;
+
+                answer.clicked = true;
+                this.$emit('incorrect', 1);
             }
         },
 
         success() {
             this.$store.commit('stop');
+            this.sounds.point.play();
             this.$emit('success', 1);
         },
 

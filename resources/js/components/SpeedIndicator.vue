@@ -1,10 +1,10 @@
 <template>
     <div class="d-inline-block speed-indicator color-red">
-        <i class="fa" :class="getClass(1)"></i>
-        <i class="fa" :class="getClass(2)"></i>
-        <i class="fa" :class="getClass(3)"></i>
-        <i class="fa" :class="getClass(4)"></i>
-        <i class="fa" :class="getClass(5)"></i>
+        <i :class="getClass(1)"></i>
+        <i :class="getClass(2)"></i>
+        <i :class="getClass(3)"></i>
+        <i :class="getClass(4)"></i>
+        <i :class="getClass(5)"></i>
     </div>
 </template>
 
@@ -17,9 +17,9 @@ export default {
     methods: {
         getClass(id) {
             if (id <= this.speed)
-                return 'fa-star';
+                return 'fas fa-star';
 
-            return 'fa-star-o';
+            return 'far fa-star';
         }
     }
 }

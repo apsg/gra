@@ -24,6 +24,9 @@
 <script>
 import TextBox from './TextBox';
 import AvatarSelector from "./AvatarSelector";
+import {Sounds} from '../helpers';
+
+const sounds = new Sounds;
 
 export default {
     name: "Game",
@@ -56,13 +59,16 @@ export default {
             text: "",
             correct: 0,
             incorrect: 0,
-            selectedAvatar: '/images/avatars/mushroom.png'
+            selectedAvatar: '/images/avatars/mushroom.png',
+            sounds: {}
         }
     },
 
     mounted() {
         this.$store.commit('reset');
         this.startGame();
+        this.sounds.win = new Audio('/sounds/victory.wav');
+
     },
 
     methods: {
@@ -83,6 +89,7 @@ export default {
 
             if (this.$store.state.currentMission === this.missions.length - 1) {
                 this.winning = true;
+                this.sounds.win.play();
                 this.showText(this.winText(this.points), true);
                 return;
             }

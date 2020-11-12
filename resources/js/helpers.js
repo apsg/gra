@@ -53,3 +53,23 @@ export function center(rect) {
         y: (rect.bottom + (rect.top - rect.bottom) / 2),
     }
 }
+
+export class Sounds {
+    constructor() {
+        this.win = new Audio('/sounds/victory.wav');
+        this.bad = new Audio('/sounds/bad.wav');
+        this.point = new Audio('/sounds/point.wav');
+    }
+
+    win() {
+        this.win.play();
+    }
+
+    point() {
+        this.point.play();
+    }
+
+    bad() {
+        this.bad.play();
+    }
+}
