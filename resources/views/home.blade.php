@@ -10,6 +10,7 @@
                     <div class="card-body">
                         <ul>
                             <li>Możliwość generowania tokenów do zdalnego dostepu do gry (ważne 2 godziny od uruchomienia gry)</li>
+                            <li>Dodane efekty dźwiękowe i sterowanie dźwiękiem</li>
                         </ul>
                     </div>
                 </div>
