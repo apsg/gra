@@ -13,27 +13,32 @@
             v-on:success="nextMission"
             v-on:incorrect="incorrect++"
         ></mission>
-        <avatar-selector
-            :avatars="avatars"
-            v-on:avatar-change="changeAvatar"
-        >
-        </avatar-selector>
+        <div class="top-control-bar d-flex justify-content-between">
+            <div></div>
+            <div></div>
+            <div></div>
+            <sound-control/>
+            <avatar-selector
+                :avatars="avatars"
+                v-on:avatar-change="changeAvatar"
+            >
+            </avatar-selector>
+        </div>
     </div>
 </template>
 
 <script>
 import TextBox from './TextBox';
 import AvatarSelector from "./AvatarSelector";
-import {Sounds} from '../helpers';
-
-const sounds = new Sounds;
+import SoundControl from "./SoundControl";
 
 export default {
     name: "Game",
 
     components: {
         TextBox,
-        AvatarSelector
+        AvatarSelector,
+        SoundControl
     },
 
     props: {
@@ -68,7 +73,6 @@ export default {
         this.$store.commit('reset');
         this.startGame();
         this.sounds.win = new Audio('/sounds/victory.wav');
-
     },
 
     methods: {
@@ -89,8 +93,12 @@ export default {
 
             if (this.$store.state.currentMission === this.missions.length - 1) {
                 this.winning = true;
-                this.sounds.win.play();
                 this.showText(this.winText(this.points), true);
+
+                if (this.$store.state.sound) {
+                    this.sounds.win.play();
+                }
+
                 return;
             }
 
@@ -134,11 +142,24 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .game {
     position: relative;
     width: 100%;
     height: 100%;
+
+    .top-control-bar {
+        pointer-events: none;
+        position: absolute;
+        z-index: 1100;
+        top: 0;
+        left: 0;
+        right: 0;
+
+        & > * {
+            pointer-events: auto;
+        }
+    }
 }
 
 </style>

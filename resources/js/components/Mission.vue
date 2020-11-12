@@ -6,7 +6,7 @@
                         :class="inputs.keyboard ? 'btn-primary' : 'btn-secondary'"
                         @click="inputs.keyboard = !inputs.keyboard"
                 >
-                    <i class="fa fa-keyboard-o"></i>
+                    <i class="far fa-keyboard"></i>
                 </button>
                 <button class="btn"
                         :class="inputs.mouse ? 'btn-primary' : 'btn-secondary'"
@@ -22,6 +22,8 @@
                 </button>
             </div>
             <speed-selector :speed="speed" v-on:change="setSpeed"></speed-selector>
+            <div>
+            </div>
             <div>
             </div>
         </div>
@@ -85,7 +87,7 @@ import Avatar from "./Avatar";
 import Answer from "./Answer";
 import SpeedSelector from "./SpeedSelector";
 import {BUTTON_FIRE} from "../constants";
-import {collision, Sounds} from "../helpers";
+import {collision} from "../helpers";
 
 export default {
     name: 'Mission',
@@ -210,7 +212,8 @@ export default {
                     return;
                 }
 
-                this.sounds.bad.play();
+                if (this.$store.state.sound)
+                    this.sounds.bad.play();
 
                 if (answer.clicked === true)
                     return;
@@ -222,7 +225,10 @@ export default {
 
         success() {
             this.$store.commit('stop');
-            this.sounds.point.play();
+
+            if (this.$store.state.sound)
+                this.sounds.point.play();
+
             this.$emit('success', 1);
         },
 

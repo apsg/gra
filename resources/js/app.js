@@ -24,6 +24,7 @@ const store = new Vuex.Store({
     state: {
         currentMission: 0,
         stop: false,
+        sound: true,
     },
 
     mutations: {
@@ -39,10 +40,13 @@ const store = new Vuex.Store({
             state.currentMission++;
         },
 
-        reset(state)
-        {
+        reset(state) {
             state.currentMission = 0;
             state.stop = false;
+        },
+
+        toggleSound(state) {
+            state.sound = !state.sound;
         }
     }
 });

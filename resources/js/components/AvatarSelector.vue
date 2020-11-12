@@ -2,7 +2,7 @@
     <div class="avatar-selector">
         <div class="text-right">
             <button class="btn btn-secondary" @click.prevent="showGallery = !showGallery">
-                <i class="fa fa-smile-o"></i>
+                <i class="far fa-smile"></i>
             </button>
         </div>
         <transition name="slide">
@@ -45,12 +45,10 @@ export default {
 
 <style lang="scss" scoped>
 .avatar-selector {
-    z-index: 1100;
-    position: absolute;
-    top: 0;
-    right: 0;
-
     .gallery {
+        position: absolute;
+        top: 50px;
+        right: 0;
         max-height: 800px;
         overflow-y: auto;
 
