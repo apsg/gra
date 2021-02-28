@@ -26,10 +26,32 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a href="{{ route('mission.index') }}" class="nav-link">Misje</a>
+                            <div class="nav-link disabled">Wybierz typ gry</div>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('games.index') }}" class="nav-link">Gry</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"
+                               data-toggle="dropdown"
+                               href="#" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false">Wskaż poprawną</a>
+                            <div class="dropdown-menu">
+                                <a href="{{ route('mission.index') }}" class="dropdown-item">Misje</a>
+                                <a href="{{ route('games.index') }}" class="dropdown-item">Gry</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"
+                               data-toggle="dropdown"
+                               href="#" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false">Kategoryzacja</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Separated link</a>
+                            </div>
                         </li>
                     </ul>
 

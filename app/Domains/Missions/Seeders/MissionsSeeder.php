@@ -192,6 +192,206 @@ class MissionsSeeder extends Seeder
                     ],
                 ],
             ],
+
+            [
+                'slug'    => 'triada1',
+                'image'   => 'images/missions/o-sobie.png',
+                'title'   => 'Triada poznawcza',
+                'answers' => [
+                    [
+                        'text'       => 'Myśli o mnie',
+                        'is_correct' => true,
+                    ],
+                    [
+                        'text'       => 'Myśli o innych',
+                        'is_correct' => false,
+                    ],
+                    [
+                        'text'       => 'Myśli o przyszłości',
+                        'is_correct' => false,
+                    ],
+                ],
+            ],
+
+            [
+                'slug'    => 'triada2',
+                'image'   => 'images/missions/o-sobie2.png',
+                'title'   => 'Triada poznawcza',
+                'answers' => [
+                    [
+                        'text'       => 'Myśli o mnie',
+                        'is_correct' => true,
+                    ],
+                    [
+                        'text'       => 'Myśli o innych',
+                        'is_correct' => false,
+                    ],
+                    [
+                        'text'       => 'Myśli o przyszłości',
+                        'is_correct' => false,
+                    ],
+                ],
+            ],
+
+            [
+                'slug'    => 'triada3',
+                'image'   => 'images/missions/mysli-o-mnie.png',
+                'title'   => 'Triada poznawcza',
+                'answers' => [
+                    [
+                        'text'       => 'Myśli o mnie',
+                        'is_correct' => true,
+                    ],
+                    [
+                        'text'       => 'Myśli o innych',
+                        'is_correct' => false,
+                    ],
+                    [
+                        'text'       => 'Myśli o przyszłości',
+                        'is_correct' => false,
+                    ],
+                ],
+            ],
+
+            [
+                'slug'    => 'triada4',
+                'image'   => 'images/missions/przyszlosc3.png',
+                'title'   => 'Triada poznawcza',
+                'answers' => [
+                    [
+                        'text'       => 'Myśli o mnie',
+                        'is_correct' => false,
+                    ],
+                    [
+                        'text'       => 'Myśli o innych',
+                        'is_correct' => false,
+                    ],
+                    [
+                        'text'       => 'Myśli o przyszłości',
+                        'is_correct' => true,
+                    ],
+                ],
+            ],
+
+            [
+                'slug'    => 'triada5',
+                'image'   => 'images/missions/o-przyszlosci.png',
+                'title'   => 'Triada poznawcza',
+                'answers' => [
+                    [
+                        'text'       => 'Myśli o mnie',
+                        'is_correct' => false,
+                    ],
+                    [
+                        'text'       => 'Myśli o innych',
+                        'is_correct' => false,
+                    ],
+                    [
+                        'text'       => 'Myśli o przyszłości',
+                        'is_correct' => true,
+                    ],
+                ],
+            ],
+
+            [
+                'slug'    => 'triada6',
+                'image'   => 'images/missions/przyszlosc2.png',
+                'title'   => 'Triada poznawcza',
+                'answers' => [
+                    [
+                        'text'       => 'Myśli o mnie',
+                        'is_correct' => false,
+                    ],
+                    [
+                        'text'       => 'Myśli o innych',
+                        'is_correct' => false,
+                    ],
+                    [
+                        'text'       => 'Myśli o przyszłości',
+                        'is_correct' => true,
+                    ],
+                ],
+            ],
+
+            [
+                'slug'    => 'triada7',
+                'image'   => 'images/missions/przyszlosc.png',
+                'title'   => 'Triada poznawcza',
+                'answers' => [
+                    [
+                        'text'       => 'Myśli o mnie',
+                        'is_correct' => false,
+                    ],
+                    [
+                        'text'       => 'Myśli o innych',
+                        'is_correct' => false,
+                    ],
+                    [
+                        'text'       => 'Myśli o przyszłości',
+                        'is_correct' => true,
+                    ],
+                ],
+            ],
+
+            [
+                'slug'    => 'triada8',
+                'image'   => 'images/missions/nielubia.png',
+                'title'   => 'Triada poznawcza',
+                'answers' => [
+                    [
+                        'text'       => 'Myśli o mnie',
+                        'is_correct' => false,
+                    ],
+                    [
+                        'text'       => 'Myśli o innych',
+                        'is_correct' => true,
+                    ],
+                    [
+                        'text'       => 'Myśli o przyszłości',
+                        'is_correct' => false,
+                    ],
+                ],
+            ],
+
+            [
+                'slug'    => 'triada9',
+                'image'   => 'images/missions/ocena-siebie.png',
+                'title'   => 'Triada poznawcza',
+                'answers' => [
+                    [
+                        'text'       => 'Myśli o mnie',
+                        'is_correct' => true,
+                    ],
+                    [
+                        'text'       => 'Myśli o innych',
+                        'is_correct' => false,
+                    ],
+                    [
+                        'text'       => 'Myśli o przyszłości',
+                        'is_correct' => false,
+                    ],
+                ],
+            ],
+
+            [
+                'slug'    => 'triada10',
+                'image'   => 'images/missions/inni.png',
+                'title'   => 'Triada poznawcza',
+                'answers' => [
+                    [
+                        'text'       => 'Myśli o mnie',
+                        'is_correct' => true,
+                    ],
+                    [
+                        'text'       => 'Myśli o innych',
+                        'is_correct' => false,
+                    ],
+                    [
+                        'text'       => 'Myśli o przyszłości',
+                        'is_correct' => false,
+                    ],
+                ],
+            ],
         ];
     }
 }

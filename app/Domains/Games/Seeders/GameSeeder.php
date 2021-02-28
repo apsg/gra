@@ -52,6 +52,21 @@ class GameSeeder extends Seeder
                     'm9',
                 ],
             ],
+            [
+                'title'    => 'Triada poznawcza',
+                'missions' => [
+                    'triada1',
+                    'triada2',
+                    'triada3',
+                    'triada4',
+                    'triada5',
+                    'triada6',
+                    'triada7',
+                    'triada8',
+                    'triada9',
+                    'triada10',
+                ],
+            ],
         ];
     }
 }
