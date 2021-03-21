@@ -196,7 +196,7 @@ class MissionsSeeder extends Seeder
             [
                 'slug'    => 'triada1',
                 'image'   => 'images/missions/o-sobie.png',
-                'title'   => 'Triada poznawcza',
+                'title'   => 'Triada poznawcza - o sobie 1',
                 'answers' => [
                     [
                         'text'       => 'Myśli o mnie',
@@ -216,7 +216,7 @@ class MissionsSeeder extends Seeder
             [
                 'slug'    => 'triada2',
                 'image'   => 'images/missions/o-sobie2.png',
-                'title'   => 'Triada poznawcza',
+                'title'   => 'Triada poznawcza - o sobie 2',
                 'answers' => [
                     [
                         'text'       => 'Myśli o mnie',
@@ -236,7 +236,7 @@ class MissionsSeeder extends Seeder
             [
                 'slug'    => 'triada3',
                 'image'   => 'images/missions/mysli-o-mnie.png',
-                'title'   => 'Triada poznawcza',
+                'title'   => 'Triada poznawcza - o sobie 3',
                 'answers' => [
                     [
                         'text'       => 'Myśli o mnie',
@@ -256,7 +256,7 @@ class MissionsSeeder extends Seeder
             [
                 'slug'    => 'triada4',
                 'image'   => 'images/missions/przyszlosc3.png',
-                'title'   => 'Triada poznawcza',
+                'title'   => 'Triada poznawcza - o przyszłości 1',
                 'answers' => [
                     [
                         'text'       => 'Myśli o mnie',
@@ -276,7 +276,7 @@ class MissionsSeeder extends Seeder
             [
                 'slug'    => 'triada5',
                 'image'   => 'images/missions/o-przyszlosci.png',
-                'title'   => 'Triada poznawcza',
+                'title'   => 'Triada poznawcza - o przyszłości 2',
                 'answers' => [
                     [
                         'text'       => 'Myśli o mnie',
@@ -296,7 +296,7 @@ class MissionsSeeder extends Seeder
             [
                 'slug'    => 'triada6',
                 'image'   => 'images/missions/przyszlosc2.png',
-                'title'   => 'Triada poznawcza',
+                'title'   => 'Triada poznawcza - o przyszłości 3',
                 'answers' => [
                     [
                         'text'       => 'Myśli o mnie',
@@ -316,7 +316,7 @@ class MissionsSeeder extends Seeder
             [
                 'slug'    => 'triada7',
                 'image'   => 'images/missions/przyszlosc.png',
-                'title'   => 'Triada poznawcza',
+                'title'   => 'Triada poznawcza - o przyszłości 4',
                 'answers' => [
                     [
                         'text'       => 'Myśli o mnie',
@@ -336,7 +336,7 @@ class MissionsSeeder extends Seeder
             [
                 'slug'    => 'triada8',
                 'image'   => 'images/missions/nielubia.png',
-                'title'   => 'Triada poznawcza',
+                'title'   => 'Triada poznawcza - o innych 1',
                 'answers' => [
                     [
                         'text'       => 'Myśli o mnie',
@@ -356,7 +356,7 @@ class MissionsSeeder extends Seeder
             [
                 'slug'    => 'triada9',
                 'image'   => 'images/missions/ocena-siebie.png',
-                'title'   => 'Triada poznawcza',
+                'title'   => 'Triada poznawcza - o sobie 4',
                 'answers' => [
                     [
                         'text'       => 'Myśli o mnie',
@@ -376,7 +376,7 @@ class MissionsSeeder extends Seeder
             [
                 'slug'    => 'triada10',
                 'image'   => 'images/missions/inni.png',
-                'title'   => 'Triada poznawcza',
+                'title'   => 'Triada poznawcza - o sobie 5',
                 'answers' => [
                     [
                         'text'       => 'Myśli o mnie',
